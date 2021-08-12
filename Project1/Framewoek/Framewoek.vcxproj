@@ -9,8 +9,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{31420a18-a2cd-4a31-9d83-d623dcd7f6d3}</ProjectGuid>
-    <RootNamespace>Project1</RootNamespace>
+    <ProjectGuid>{22f199a9-e6e6-4497-b1ba-a19469ce8d71}</ProjectGuid>
+    <RootNamespace>Framewoek</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -46,6 +46,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainUpdate.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Headers.h" />
+    <ClInclude Include="MainUpdate.h" />
+    <ClInclude Include="struct.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
