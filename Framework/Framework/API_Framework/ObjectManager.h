@@ -31,11 +31,21 @@ public:
 	// ** 객체 생성
 	Object* CreateObject(string _Key);
 
-	// ** 컨테이너에서 캑체를 찾음
+	// ** 컨테이너에서 객체를 찾음
 	void FindObject(string _Key);
+
+	// ** 객체 생성
+	Object* CreateObject(string _Key, Vector3 _Position);
+
+	// ** 컨테이너에서 객체를 찾음
+	void FindObject(string _Key, Vector3 _Position);
 
 	// ** 객체 추가.
 	void AddObject(string _strKey);
+
+	// ** 사용후 더이상 사용하지 않는 오브젝트 회수
+	void RecallObject(Object* _Object);
+
 	void Release();
 public:
 	// ** 플레이어를 반환.

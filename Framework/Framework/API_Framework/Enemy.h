@@ -3,8 +3,6 @@
 
 class Enemy : public Object
 {
-private:
-	int Count;
 public:
 	virtual void Initialize()override;
 	virtual int Update()override;

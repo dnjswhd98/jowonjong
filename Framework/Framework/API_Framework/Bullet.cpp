@@ -1,7 +1,7 @@
 #include "Bullet.h"
 
 
-Bullet::Bullet() : Count(0)
+Bullet::Bullet()
 {
 
 }
@@ -18,8 +18,7 @@ void Bullet::Initialize()
 	TransInfo.Scale = Vector3(30.0f, 30.0f);
 
 	strKey = "Bullet";
-	Count = 0;
-	Active = false;
+	//Active = false;
 
 	Speed = 5.0f;
 }
@@ -27,6 +26,10 @@ void Bullet::Initialize()
 int Bullet::Update()
 {
 	TransInfo.Position.x += Speed;
+
+	if (TransInfo.Position.x >= (WindowsWidth - 100))
+		return 1;
+
 	return 0;
 }
 

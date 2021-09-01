@@ -1,7 +1,6 @@
 #include "Player.h"
 #include "InputManager.h"
 #include "ObjectManager.h"
-#include "ObjectFactory.h"
 
 #include "Bullet.h"
 
@@ -20,16 +19,30 @@ void Player::Initialize()
 	TransInfo.Position = Vector3(WindowsWidth / 2, WindowsHeight / 2);
 	TransInfo.Scale = Vector3(100.0f, 100.0f);
 
-	strKey = "Player";
-	Active = false;
+	//strKey = "Player";
+	//Active = false;
 
-	Speed = 3.0f;
+	//Speed = 3.0f;
 }
 
 int Player::Update()
 {
-	DWORD dwKey = InputManager::GetInstance()->GetKey();
+	TransInfo.Position = InputManager::GetInstance()->GetMousePosition();
+	
+	vector<Object*> BulletList;
+	/*
+	//if((Time + 1000) < GetTickCount64())
+	{
+		Object* bullObj = new Bullet;
+		bullObj->Initialize();
+		bullObj->SetPosition(TransInfo.Position);
+		bullObj->SetActive(false);
+		BulletList.push_back(bullObj);
+	}
+	*/
 
+	/*
+	DWORD dwKey = InputManager::GetInstance()->GetKey();
 	if (dwKey & KEY_UP)
 		TransInfo.Position.y -= Speed;
 
@@ -41,15 +54,12 @@ int Player::Update()
 
 	if (dwKey & KEY_RIGHT)
 		TransInfo.Position.x += Speed;
-
 	if (dwKey & KEY_SPACE)
 	{
 		//** ºí·¿ »ý¼º
-		/*
-		ObjectManager::GetInstance()->AddObject(
-			ObjectFactory<Bullet>::CreateObject());
-		*/
+		ObjectManager::GetInstance()->FindObject("Bullet", TransInfo.Position);
 	}
+	*/
 
 	return 0;
 }

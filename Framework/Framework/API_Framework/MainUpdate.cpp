@@ -33,7 +33,7 @@ void MainUpdate::Update()
 
 void MainUpdate::Render()
 {
-	Rectangle(m_hdc, 0, 0, WindowsWidth, WindowsWidth);
+	Rectangle(m_hdc, 0, 0, WindowsWidth, WindowsHeight);
 
 	SceneManager::GetInstance()->Render(m_hdc);
 }
