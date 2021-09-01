@@ -39,8 +39,8 @@ void Stage::Initialize()
 	DisableList = ObjectManager::GetInstance()->GetDisableList();
 
 	SetTime = ULONGLONG(rand() % 5000 + 3000);
-	Time = GetTickCount64();
 	*/
+	Time = GetTickCount64();
 }
 
 void Stage::Update()
@@ -62,11 +62,17 @@ void Stage::Update()
 	//	
 	//}
 
-	Object* bullObj = new Bullet;
-	bullObj->Initialize();
-	bullObj->SetPosition(m_pPlayer->GetPosition());
-	bullObj->SetActive(false);
-	BulletList.push_back(bullObj);
+	if (Time + 300 < GetTickCount64())
+	{
+		Object* bullObj = new Bullet;
+
+		bullObj->Initialize();
+		bullObj->SetPosition(m_pPlayer->GetPosition());
+		bullObj->SetActive(false);
+		BulletList.push_back(bullObj);
+
+		Time = GetTickCount64();
+	}
 
 	for (int i = 0; i < BulletList.size(); ++i)
 	{
@@ -80,8 +86,7 @@ void Stage::Update()
 		{
 			if (CollisionManager::EllipseCollision(BulletList[i], (*iter)))
 			{
-				iter = EnemyList.erase(iter);
-			}
+				iter = EnemyList.erase(iter);			}
 			else
 				++iter;
 		}
