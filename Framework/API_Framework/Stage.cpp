@@ -3,6 +3,7 @@
 #include "ObjectManager.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Bullet.h"
 #include "ObjectFactory.h"
 #include "CollisionManager.h"
 #include "Stage_Back.h"
@@ -23,7 +24,6 @@ void Stage::Initialize()
 {
 	m_pPlayer = ObjectManager::GetInstance()->GetPlayer();
 
-	// ** 오브젝트 매니저에서 총알 리스트를 받아옴. (포인터로...)
 	BulletList = ObjectManager::GetInstance()->GetBulletList();
 
 	// ** 오브젝트 매니저에서 몬스터 리스트를 받아옴. (포인터로...)
@@ -49,12 +49,21 @@ void Stage::Initialize()
 		EnemyList->push_back(pObj);
 	}
 
+	
+	Object* pObj = new Bullet;
+	pObj->Initialize();
+	pObj->SetPosition(m_pPlayer->GetPosition());
+	BulletList->push_back(pObj);
+	
+	
+
 	ImageList = Object::GetImageList();
 }
 
 void Stage::Update()
 {
 	m_pPlayer->Update();
+
 	DWORD dwKey = InputManager::GetInstance()->GetKey();
 
 	for (vector<Object*>::iterator iter = EnemyList->begin();
@@ -68,19 +77,22 @@ void Stage::Update()
 			++iter;
 	}
 
+	(*BulletList->begin())->Update();
+
 	for (vector<Object*>::iterator iter2 = EnemyList->begin();
 		iter2 != EnemyList->end(); )
 	{
 		// ** 충돌 처리
-		if (CollisionManager::EllipseCollision(m_pPlayer, (*iter2)))
+		if (CollisionManager::EllipseCollision((*BulletList->begin()), (*iter2)))
 		{
 			// ** 몬스터 삭제
-			if(dwKey & KEY_LBUTTON)
+			if (dwKey & KEY_LBUTTON)
 				iter2 = EnemyList->erase(iter2);
 			break;
 		}
 		else
 			++iter2;
+	
 	}
 
 	/*
@@ -132,11 +144,12 @@ void Stage::Render(HDC _hdc)
 		iter != EnemyList->end(); ++iter)
 		(*iter)->Render(ImageList["Buffer"]->GetMemDC());
 
-	for (vector<Object*>::iterator iter = BulletList->begin();
-		iter != BulletList->end(); ++iter)
-		(*iter)->Render(ImageList["Buffer"]->GetMemDC());
+	//for (vector<Object*>::iterator iter = BulletList->begin();
+	//	iter != BulletList->end(); ++iter)
+	(*BulletList->begin())->Render(ImageList["Buffer"]->GetMemDC());
 
 	m_pPlayer->Render(ImageList["Buffer"]->GetMemDC());
+	
 
 	BitBlt(_hdc,
 		0, 0,

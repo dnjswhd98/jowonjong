@@ -1,4 +1,5 @@
 #include "Bullet.h"
+#include "Player.h"
 #include "ObjectManager.h"
 #include "MathManager.h"
 
@@ -29,27 +30,34 @@ void Bullet::Initialize()
 
 int Bullet::Update()
 {
-	Target = ObjectManager::GetInstance()->GetTarget(TransInfo.Position);
+	Target = ObjectManager::GetInstance()->GetPlayer();
 
-	if (Target)
-		TransInfo.Direction = MathManager::GetDirection(TransInfo.Position, Target->GetPosition());	
+	TransInfo.Position = Target->GetPosition();
 
-	TransInfo.Position.x += TransInfo.Direction.x * Speed;
-	TransInfo.Position.y += TransInfo.Direction.y * Speed;
+	//if (Target)
+	//	TransInfo.Direction = MathManager::GetDirection(TransInfo.Position, Target->GetPosition());	
 
-	if (TransInfo.Position.x >= (WindowsWidth - 100))
-		return 1;
+	//TransInfo.Position.x += TransInfo.Direction.x * Speed;
+	//TransInfo.Position.y += TransInfo.Direction.y * Speed;
+
+	//if (TransInfo.Position.x >= (WindowsWidth - 100))
+	//	return 1;
 
 	return 0;
 }
 
 void Bullet::Render(HDC _hdc)
 {
+	//Ellipse(_hdc,
+	//	int(TransInfo.Position.x - (TransInfo.Scale.x / 2)),
+	//	int(TransInfo.Position.y - (TransInfo.Scale.x / 2)),
+	//	int(TransInfo.Position.x + (TransInfo.Scale.x / 2)),
+	//	int(TransInfo.Position.y + (TransInfo.Scale.x / 2)));
 	Ellipse(_hdc,
-		int(TransInfo.Position.x - (TransInfo.Scale.x / 2)),
-		int(TransInfo.Position.y - (TransInfo.Scale.x / 2)),
-		int(TransInfo.Position.x + (TransInfo.Scale.x / 2)),
-		int(TransInfo.Position.y + (TransInfo.Scale.x / 2)));
+		Collider.Position.x - Collider.Scale.x / 2,
+		Collider.Position.y - Collider.Scale.y / 2,
+		Collider.Position.x + Collider.Scale.x / 2,
+		Collider.Position.y + Collider.Scale.y / 2);
 }
 
 void Bullet::Release()
