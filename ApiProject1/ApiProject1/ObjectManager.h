@@ -47,17 +47,13 @@ public:
 	Object* GetPlayer() { return pPlayer; }
 	void SetPlayer(Object* _pPlayer) { pPlayer = _pPlayer; }
 
-
 	list<Object*>* GetEnableList() { return &EnableList; }
 	map<string, list<Object*>>* GetDisableList() { return &DisableList; }
-
 
 	vector<Object*>* GetBulletList() { return &BulletList; }
 	vector<Object*>* GetEnemyList() { return &EnemyList; }
 
 	void AddBullet(Vector3 _vPos);
-
-
 
 	list<Object*>* FindList(string _Key)
 	{

@@ -90,7 +90,6 @@ void ObjectManager::FindObject(string _Key, Vector3 _Position)
 
 void ObjectManager::AddObject(string _strKey)
 {
-
 }
 
 void ObjectManager::RecallObject(Object* _Object)

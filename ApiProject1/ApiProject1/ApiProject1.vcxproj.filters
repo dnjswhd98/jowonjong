@@ -70,6 +70,9 @@
     <Filter Include="소스 파일\Scene\Stage">
       <UniqueIdentifier>{5c5596b7-e295-423a-9cab-c953b90f4430}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Object\Player">
+      <UniqueIdentifier>{7cb510ba-d677-4458-a3fd-25a11a7233ce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainUpdate.h">
@@ -144,6 +147,9 @@
     <ClInclude Include="Stage.h">
       <Filter>소스 파일\Scene\Stage</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>소스 파일\Object\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ApiProject1.cpp">
@@ -187,6 +193,9 @@
     </ClCompile>
     <ClCompile Include="Stage.cpp">
       <Filter>소스 파일\Scene\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>소스 파일\Object\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,18 +1,17 @@
 #pragma once
-#include "Scene.h"
+#include "Object.h"
 
-class Object;
-class Stage : public Scene
+class Player : public Object
 {
-private:
-	Object* _pPlayer;
 public:
 	virtual void Initialize()override;
 	virtual void Update()override;
 	virtual void Render(HDC _hdc)override;
 	virtual void Release()override;
 
-	Stage();
-	virtual ~Stage();
+	virtual Object* Clone()override { return new Player(*this); }
+
+	Player();
+	virtual~Player();
 };
 

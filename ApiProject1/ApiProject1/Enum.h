@@ -4,7 +4,5 @@
 enum class SCENEID
 {
 	LOGO,
-	MENU,
 	STAGE,
-	EXIT,
 };

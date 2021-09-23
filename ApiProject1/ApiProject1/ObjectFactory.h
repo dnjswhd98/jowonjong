@@ -1,5 +1,6 @@
 #pragma once
 #include "Object.h"
+#include "Bridge.h"
 
 template<typename T>
 class ObjectFactory
