@@ -31,6 +31,45 @@
     <Filter Include="소스 파일\Scene">
       <UniqueIdentifier>{e0852039-3190-4df7-bf53-07e981673b23}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Scene\Logo">
+      <UniqueIdentifier>{84e32760-a35d-45ba-9aa5-d70ab68d82d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Manager\RenderManager">
+      <UniqueIdentifier>{07297e67-5137-474f-a112-056aee21aafb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Manager\RenderManager\Bitmap">
+      <UniqueIdentifier>{912948a1-74ce-4709-9a53-1ac0306ffdbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Manager\ObjectManager">
+      <UniqueIdentifier>{46f1062b-f75d-457e-bedf-fa97c278731e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Manager\ObjectFactory">
+      <UniqueIdentifier>{0dba350c-1841-47af-aae2-208c65e0ed5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Manager\Pattern">
+      <UniqueIdentifier>{0398304d-edae-45df-ac13-70a2652dafec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Manager\MathManager">
+      <UniqueIdentifier>{1bbc702e-c4ac-46c7-b04a-a04abb00cb0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Manager\InputManager">
+      <UniqueIdentifier>{74057a88-e9ce-452e-af1b-8ab4439500d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Manager\CollisionManager">
+      <UniqueIdentifier>{d646f9f5-cb25-4a72-8b2f-97dc52694627}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Manager\Pattern\Bridge">
+      <UniqueIdentifier>{ded8477a-1f64-4d81-b7bc-9b2786f1dfb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Object">
+      <UniqueIdentifier>{9711c312-f625-4096-9e7c-d7c5000c728a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Manager\Pattern\Prototype">
+      <UniqueIdentifier>{e4a940cc-2405-4b29-9b40-27132a3cf8ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Scene\Stage">
+      <UniqueIdentifier>{5c5596b7-e295-423a-9cab-c953b90f4430}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainUpdate.h">
@@ -69,6 +108,42 @@
     <ClInclude Include="Scene.h">
       <Filter>소스 파일\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Logo.h">
+      <Filter>소스 파일\Scene\Logo</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderManager.h">
+      <Filter>소스 파일\Manager\RenderManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Bitmap.h">
+      <Filter>소스 파일\Manager\RenderManager\Bitmap</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>소스 파일\Manager\ObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFactory.h">
+      <Filter>소스 파일\Manager\ObjectFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>소스 파일\Manager\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>소스 파일\Manager\InputManager</Filter>
+    </ClInclude>
+    <ClInclude Include="MathManager.h">
+      <Filter>소스 파일\Manager\MathManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Bridge.h">
+      <Filter>소스 파일\Manager\Pattern\Bridge</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>소스 파일\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Prototype.h">
+      <Filter>소스 파일\Manager\Pattern\Prototype</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>소스 파일\Scene\Stage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ApiProject1.cpp">
@@ -82,6 +157,36 @@
     </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>소스 파일\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Logo.cpp">
+      <Filter>소스 파일\Scene\Logo</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderManager.cpp">
+      <Filter>소스 파일\Manager\RenderManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Bitmap.cpp">
+      <Filter>소스 파일\Manager\RenderManager\Bitmap</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>소스 파일\Manager\ObjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>소스 파일\Manager\InputManager</Filter>
+    </ClCompile>
+    <ClCompile Include="MathManager.cpp">
+      <Filter>소스 파일\Manager\MathManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Bridge.cpp">
+      <Filter>소스 파일\Manager\Pattern\Bridge</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>소스 파일\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Prototype.cpp">
+      <Filter>소스 파일\Manager\Pattern\Prototype</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>소스 파일\Scene\Stage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

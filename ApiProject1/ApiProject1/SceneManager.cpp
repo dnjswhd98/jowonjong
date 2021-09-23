@@ -1,5 +1,7 @@
 #include "SceneManager.h"
 
+#include "Logo.h"
+
 SceneManager* SceneManager::instance = nullptr;
 
 void SceneManager::SetScene(SCENEID _SceneID)
@@ -8,7 +10,8 @@ void SceneManager::SetScene(SCENEID _SceneID)
 
 	switch (_SceneID)
 	{
-
+	case SCENEID::LOGO:
+		pSceneState = new Logo;
 	}
 	
 }
