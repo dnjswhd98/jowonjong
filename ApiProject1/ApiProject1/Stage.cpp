@@ -3,29 +3,32 @@
 #include "ObjectManager.h"
 #include "ObjectFactory.h"
 #include "CollisionManager.h"
+
+#include "StageBack.h"
 #include "Player.h"
 
 void Stage::Initialize()
 {
+	_StageBack = new StageBack;
 	_pPlayer = ObjectManager::GetInstance()->GetPlayer();
-	_pPlayer->Initialize();
 }
 
 void Stage::Update()
 {
-	//_pPlayer->Update();
+	_pPlayer->Update();
 }
 
 void Stage::Render(HDC _hdc)
 {
-	//_pPlayer->Render(_hdc);
+	_StageBack->Render(_hdc);
+	_pPlayer->Render(_hdc);
 }
 
 void Stage::Release()
 {
 }
 
-Stage::Stage()
+Stage::Stage() : _pPlayer(nullptr)
 {
 }
 

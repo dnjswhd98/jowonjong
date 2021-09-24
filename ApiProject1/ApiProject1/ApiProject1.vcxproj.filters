@@ -73,6 +73,9 @@
     <Filter Include="소스 파일\Object\Player">
       <UniqueIdentifier>{7cb510ba-d677-4458-a3fd-25a11a7233ce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Object\StageBack">
+      <UniqueIdentifier>{b25d3b5d-d34b-45ba-8cb0-beea47d6970d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainUpdate.h">
@@ -150,6 +153,9 @@
     <ClInclude Include="Player.h">
       <Filter>소스 파일\Object\Player</Filter>
     </ClInclude>
+    <ClInclude Include="StageBack.h">
+      <Filter>소스 파일\Object\StageBack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ApiProject1.cpp">
@@ -196,6 +202,9 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>소스 파일\Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="StageBack.cpp">
+      <Filter>소스 파일\Object\StageBack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

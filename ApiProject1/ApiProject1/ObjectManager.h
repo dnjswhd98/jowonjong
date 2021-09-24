@@ -54,14 +54,14 @@ public:
 	vector<Object*>* GetEnemyList() { return &EnemyList; }
 
 	void AddBullet(Vector3 _vPos);
-
+	
 	list<Object*>* FindList(string _Key)
 	{
 		map<string, list<Object*>>::iterator iter = DisableList.find(_Key);
-
+	
 		if (iter == DisableList.end())
 			return nullptr;
-
+	
 		return &iter->second;
 	}
 private:

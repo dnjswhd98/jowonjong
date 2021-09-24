@@ -52,6 +52,7 @@ public:
 	void SetActive(const bool& _Active) { Active = _Active; }
 
 	Object();
+	Object(const Transform& _rTransInfo) : TransInfo(_rTransInfo) { }
 	~Object();
 };
 

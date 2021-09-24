@@ -3,6 +3,8 @@
 #include "ObjectFactory.h"
 #include "Prototype.h"
 
+ObjectManager* ObjectManager::Instance = nullptr;
+
 void ObjectManager::Initialize()
 {
     PrototypeObject = new Prototype;

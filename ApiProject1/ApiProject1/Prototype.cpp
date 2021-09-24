@@ -1,10 +1,11 @@
 #include "Prototype.h"
+#include "Player.h"
 
 void Prototype::CreatePrototype()
 {
 	Transform TransInfo;
 
-
+	PrototypeList["Player"] = new Player(TransInfo);
 }
 
 Object* Prototype::FindPrototypeObject(string _Key)

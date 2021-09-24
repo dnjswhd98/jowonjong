@@ -16,5 +16,5 @@ const DWORD KEY_LBUTTON = 0x00000080;
 
 
 
-const int WindowsWidth = 1280;
-const int WindowsHeight = 720;
+const int WindowsWidth = 660;
+const int WindowsHeight = 520;
