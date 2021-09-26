@@ -1,5 +1,8 @@
 #include "EnemyHole.h"
+#include "ObjectManager.h"
+#include "ObjectFactory.h"
 #include "Enemy.h"
+#include "EnemyMole.h"
 
 EnemyHole::EnemyHole()
 {
@@ -27,15 +30,18 @@ void EnemyHole::Initialize()
 
 	Speed = 0.0f;
 
-	EnemyMole = new Enemy;
-	EnemyMole->Initialize();
+	oEnemyMole = new Enemy;
+	oEnemyMole->Initialize();
+
+	
+	MoleList->push_back(CreateMole<EnemyMole>());
 }
 
 //Transform& _TrnasPos
 int EnemyHole::Update()
 {
-	EnemyMole->SetPosition(TransInfo.Position.x, TransInfo.Position.y);
-	EnemyMole->Update();
+	oEnemyMole->SetPosition(TransInfo.Position.x, TransInfo.Position.y);
+	oEnemyMole->Update();
 
 	return 0;
 }
@@ -53,10 +59,20 @@ void EnemyHole::Render(HDC _hdc)
 		int(TransInfo.Scale.y),
 		RGB(255, 0, 255));
 
-	EnemyMole->Render(_hdc);
+	
 }
 
 void EnemyHole::Release()
 {
 
+}
+
+template <typename T>
+Object* EnemyHole::CreateMole()
+{
+	Bridge* pBridge = new T;
+
+	Object* pBullet = ObjectFactory<Enemy>::CreateObject(TransInfo.Position, pBridge);
+
+	return pBullet;
 }

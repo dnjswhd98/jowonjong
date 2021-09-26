@@ -2,6 +2,7 @@
 #include "ObjectManager.h"
 #include "MathManager.h"
 #include "NormalBullet.h"
+#include "RectBullet.h"
 
 Bullet::Bullet() : BridgeObject(NULL)
 {

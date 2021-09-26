@@ -2,7 +2,7 @@
 #include "Bridge.h"
 #include "EnemyMole.h"
 
-Enemy::Enemy()
+Enemy::Enemy() : BridgeObject(NULL)
 {
 
 }
@@ -14,6 +14,7 @@ Enemy::~Enemy()
 
 void Enemy::Initialize()
 {
+
 	TransInfo.Position = Vector3(0.0f, 0.0f);
 	TransInfo.Scale = Vector3(149.0f, 124.0f);
 
@@ -28,6 +29,9 @@ void Enemy::Initialize()
 	strKey = "Mole";
 	
 	Speed = 1.5f;
+
+	if(BridgeObject)
+		BridgeObject->Initialize();
 }
 
 int Enemy::Update()
