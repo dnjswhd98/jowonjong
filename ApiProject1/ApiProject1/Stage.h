@@ -7,6 +7,8 @@ class Stage : public Scene
 private:
 	Object* _StageBack;
 	Object* _pPlayer;
+
+	vector<Object*>* BulletList;
 public:
 	virtual void Initialize()override;
 	virtual void Update()override;

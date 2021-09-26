@@ -76,6 +76,15 @@
     <Filter Include="소스 파일\Object\StageBack">
       <UniqueIdentifier>{b25d3b5d-d34b-45ba-8cb0-beea47d6970d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Object\Bullet">
+      <UniqueIdentifier>{f1150b62-3d19-47e0-8293-7fb117631e18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Object\Bullet\BulletBridge">
+      <UniqueIdentifier>{f6aa2c15-8c23-403b-a28f-cf1358d77896}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Object\Bullet\BulletBridge\MarisaBullet">
+      <UniqueIdentifier>{8114ad44-c08b-4797-9529-77c39e73e47b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainUpdate.h">
@@ -156,6 +165,18 @@
     <ClInclude Include="StageBack.h">
       <Filter>소스 파일\Object\StageBack</Filter>
     </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>소스 파일\Object\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletBridge.h">
+      <Filter>소스 파일\Object\Bullet\BulletBridge</Filter>
+    </ClInclude>
+    <ClInclude Include="MarisaBullet.h">
+      <Filter>소스 파일\Object\Bullet\BulletBridge\MarisaBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSide.h">
+      <Filter>소스 파일\Object\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ApiProject1.cpp">
@@ -205,6 +226,18 @@
     </ClCompile>
     <ClCompile Include="StageBack.cpp">
       <Filter>소스 파일\Object\StageBack</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>소스 파일\Object\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletBridge.cpp">
+      <Filter>소스 파일\Object\Bullet\BulletBridge</Filter>
+    </ClCompile>
+    <ClCompile Include="MarisaBullet.cpp">
+      <Filter>소스 파일\Object\Bullet\BulletBridge\MarisaBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSide.cpp">
+      <Filter>소스 파일\Object\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

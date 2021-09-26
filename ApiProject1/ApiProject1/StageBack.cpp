@@ -4,8 +4,9 @@ void StageBack::Initialize()
 {
 }
 
-void StageBack::Update()
+int StageBack::Update()
 {
+	return 0;
 }
 
 void StageBack::Render(HDC _hdc)

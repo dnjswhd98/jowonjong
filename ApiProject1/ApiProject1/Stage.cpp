@@ -11,17 +11,33 @@ void Stage::Initialize()
 {
 	_StageBack = new StageBack;
 	_pPlayer = ObjectManager::GetInstance()->GetPlayer();
+	BulletList = ObjectManager::GetInstance()->GetBulletList();
 }
 
 void Stage::Update()
 {
 	_pPlayer->Update();
+
+	for (vector<Object*>::iterator iter = BulletList->begin();
+		iter != BulletList->end(); )
+	{
+		int iResult = (*iter)->Update();
+		
+		if (iResult == 1)
+			iter = BulletList->erase(iter);
+		else
+			++iter;
+	}
 }
 
 void Stage::Render(HDC _hdc)
 {
 	_StageBack->Render(_hdc);
 	_pPlayer->Render(_hdc);
+
+	for (vector<Object*>::iterator iter = BulletList->begin();
+		iter != BulletList->end(); ++iter)
+		(*iter)->Render(_hdc);
 }
 
 void Stage::Release()

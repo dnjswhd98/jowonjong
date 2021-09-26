@@ -43,7 +43,7 @@ public:
 
 
 	void Release();
-public:
+
 	Object* GetPlayer() { return pPlayer; }
 	void SetPlayer(Object* _pPlayer) { pPlayer = _pPlayer; }
 

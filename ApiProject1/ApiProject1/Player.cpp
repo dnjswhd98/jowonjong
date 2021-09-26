@@ -3,6 +3,9 @@
 #include "ObjectManager.h"
 #include "ObjectFactory.h"
 
+#include "Bullet.h"
+#include "MarisaBullet.h"
+
 void Player::Initialize()
 {
 	TransInfo.Position = Vector3(WindowsWidth / 2, WindowsHeight / 2);
@@ -11,9 +14,11 @@ void Player::Initialize()
 	Slow = false;
 	Speed = 1.5f;
 	SlowSpeed = 0.5f;
+
+	BulletList = ObjectManager::GetInstance()->GetBulletList();
 }
 
-void Player::Update()
+int Player::Update()
 {
 	DWORD dwKey = InputManager::GetInstance()->GetKey();		
 
@@ -59,6 +64,12 @@ void Player::Update()
 			TransInfo.Position.x -= SlowSpeed;
 		}
 	}
+
+	if (GetAsyncKeyState('Z'))
+		BulletList->push_back(CreateBullet<MarisaBullet>());
+
+
+	return 0;
 }
 
 void Player::Render(HDC _hdc)
@@ -68,6 +79,7 @@ void Player::Render(HDC _hdc)
 		int(TransInfo.Position.y - (TransInfo.Scale.y / 2)),
 		int(TransInfo.Position.x + (TransInfo.Scale.x / 2)),
 		int(TransInfo.Position.y + (TransInfo.Scale.y / 2)));
+
 }
 
 void Player::Release()
@@ -80,4 +92,14 @@ Player::Player()
 
 Player::~Player()
 {
+}
+
+template<typename T>
+inline Object* Player::CreateBullet()
+{
+	Bridge* pBridge = new T;
+
+	Object* pBullet = ObjectFactory<Bullet>::CreateObject(TransInfo.Position, pBridge);
+
+	return pBullet;
 }

@@ -18,7 +18,7 @@ protected:
 
 public:
 	virtual void Initialize() PURE;
-	virtual void Update() PURE;
+	virtual int Update() PURE;
 	virtual void Render(HDC _hdc) PURE;
 	virtual void Release() PURE;
 
