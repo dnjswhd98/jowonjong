@@ -2,6 +2,7 @@
 #include "ObjectManager.h"
 #include "MathManager.h"
 #include "MarisaBullet.h"
+#include "MarisaLazer.h"
 
 void Bullet::Initialize()
 {
@@ -17,10 +18,11 @@ void Bullet::Initialize()
 
 int Bullet::Update()
 {
+	int re;
 	if (BridgeObject)
-		BridgeObject->Update(TransInfo);
+		re = BridgeObject->Update(TransInfo);
 
-	return 0;
+	return re;
 }
 
 void Bullet::Render(HDC _hdc)

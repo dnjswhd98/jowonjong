@@ -1,4 +1,4 @@
-#include "PlayerSide.h"
+#include "PlayerSide2.h"
 #include "InputManager.h"
 #include "ObjectManager.h"
 #include "ObjectFactory.h"
@@ -7,17 +7,16 @@
 #include "Player.h"
 #include "MarisaLazer.h"
 
-void PlayerSide::Initialize()
+void PlayerSide2::Initialize()
 {
-	Fire = false;
 	_pPlayer = ObjectManager::GetInstance()->GetPlayer();
-	TransInfo.Position = Vector3(_pPlayer->GetPosition().x - 30, _pPlayer->GetPosition().y);
+	TransInfo.Position = Vector3(_pPlayer->GetPosition().x + 30, _pPlayer->GetPosition().y);
 	TransInfo.Scale = Vector3(20.0f, 20.0f);
 
 	BulletList = ObjectManager::GetInstance()->GetBulletList();
 }
 
-int PlayerSide::Update()
+int PlayerSide2::Update()
 {
 	DWORD dwKey = InputManager::GetInstance()->GetKey();
 
@@ -29,12 +28,12 @@ int PlayerSide::Update()
 	else
 		Fire = false;
 
-	TransInfo.Position = Vector3(_pPlayer->GetPosition().x - 30, _pPlayer->GetPosition().y);
+	TransInfo.Position = Vector3(_pPlayer->GetPosition().x + 30, _pPlayer->GetPosition().y);
 
 	return 0;
 }
 
-void PlayerSide::Render(HDC _hdc)
+void PlayerSide2::Render(HDC _hdc)
 {
 	Ellipse(_hdc,
 		int(TransInfo.Position.x - (TransInfo.Scale.x / 2)),
@@ -43,20 +42,20 @@ void PlayerSide::Render(HDC _hdc)
 		int(TransInfo.Position.y + (TransInfo.Scale.y / 2)));
 }
 
-void PlayerSide::Release()
+void PlayerSide2::Release()
 {
 }
 
-PlayerSide::PlayerSide()
+PlayerSide2::PlayerSide2()
 {
 }
 
-PlayerSide::~PlayerSide()
+PlayerSide2::~PlayerSide2()
 {
 }
 
 template<typename T>
-inline Object * PlayerSide::CreateBullet()
+inline Object* PlayerSide2::CreateBullet()
 {
 	Bridge* pBridge = new T;
 

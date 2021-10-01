@@ -1,28 +1,27 @@
 #pragma once
 #include "Object.h"
 
-class Player : public Object
+class PlayerSide2 : public Object
 {
 private:
-	bool Slow;
-	float Speed;
-	float SlowSpeed;
-	int Frame;
+	bool Fire;
 
 	vector<Object*>* BulletList;
-	//Object* Side;
+
+	Object* _pPlayer;
 public:
 	virtual void Initialize()override;
 	virtual int Update()override;
 	virtual void Render(HDC _hdc)override;
 	virtual void Release()override;
 
-	virtual Object* Clone()override { return new Player(*this); }
+	virtual Object* Clone()override { return new PlayerSide2(*this); }
 
 	template <typename T>
 	Object* CreateBullet();
 
-	Player();
-	Player(const Transform& _rTransInfo) : Object(_rTransInfo) { }
-	virtual~Player();
+	PlayerSide2();
+	PlayerSide2(const Transform& _rTransInfo) : Object(_rTransInfo) { }
+	~PlayerSide2();
 };
+

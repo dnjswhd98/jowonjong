@@ -1,5 +1,7 @@
 #include "Object.h"
 
+map<string, Bitmap*> Object::ImageList;
+
 RECT Object::GetCollider()
 {
 	return RECT{

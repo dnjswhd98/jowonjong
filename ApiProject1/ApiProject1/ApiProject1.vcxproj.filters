@@ -85,6 +85,24 @@
     <Filter Include="소스 파일\Object\Bullet\BulletBridge\MarisaBullet">
       <UniqueIdentifier>{8114ad44-c08b-4797-9529-77c39e73e47b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Object\Bullet\BulletBridge\MarisaLazer">
+      <UniqueIdentifier>{f3c55d10-ac22-4495-995d-ec176eade3c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Object\StageFront">
+      <UniqueIdentifier>{ae7d2376-1927-4eb1-98aa-59ec3d3174fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Object\Enemy">
+      <UniqueIdentifier>{31ad6842-b0e3-4087-b2ef-15dcd0d3ba92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Object\Enemy\EnemyBridge">
+      <UniqueIdentifier>{2c536bb7-42aa-4d6d-8868-23b1a3ae66ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Object\Enemy\EnemyBridge\Fairy1">
+      <UniqueIdentifier>{89afae2f-8fcb-4623-a18a-ab6c22d1ff99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Object\Player\PlayerSide">
+      <UniqueIdentifier>{b8db30cf-8b9f-41a7-8abc-4ea4f17e21a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainUpdate.h">
@@ -174,8 +192,26 @@
     <ClInclude Include="MarisaBullet.h">
       <Filter>소스 파일\Object\Bullet\BulletBridge\MarisaBullet</Filter>
     </ClInclude>
+    <ClInclude Include="MarisaLazer.h">
+      <Filter>소스 파일\Object\Bullet\BulletBridge\MarisaLazer</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>소스 파일\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBridge.h">
+      <Filter>소스 파일\Object\Enemy\EnemyBridge</Filter>
+    </ClInclude>
+    <ClInclude Include="Fairy1.h">
+      <Filter>소스 파일\Object\Enemy\EnemyBridge\Fairy1</Filter>
+    </ClInclude>
+    <ClInclude Include="StageFront.h">
+      <Filter>소스 파일\Object\StageFront</Filter>
+    </ClInclude>
     <ClInclude Include="PlayerSide.h">
-      <Filter>소스 파일\Object\Player</Filter>
+      <Filter>소스 파일\Object\Player\PlayerSide</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSide2.h">
+      <Filter>소스 파일\Object\Player\PlayerSide</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -236,8 +272,26 @@
     <ClCompile Include="MarisaBullet.cpp">
       <Filter>소스 파일\Object\Bullet\BulletBridge\MarisaBullet</Filter>
     </ClCompile>
+    <ClCompile Include="MarisaLazer.cpp">
+      <Filter>소스 파일\Object\Bullet\BulletBridge\MarisaLazer</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>소스 파일\Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBridge.cpp">
+      <Filter>소스 파일\Object\Enemy\EnemyBridge</Filter>
+    </ClCompile>
+    <ClCompile Include="Fairy1.cpp">
+      <Filter>소스 파일\Object\Enemy\EnemyBridge\Fairy1</Filter>
+    </ClCompile>
+    <ClCompile Include="StageFront.cpp">
+      <Filter>소스 파일\Object\StageFront</Filter>
+    </ClCompile>
     <ClCompile Include="PlayerSide.cpp">
-      <Filter>소스 파일\Object\Player</Filter>
+      <Filter>소스 파일\Object\Player\PlayerSide</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSide2.cpp">
+      <Filter>소스 파일\Object\Player\PlayerSide</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

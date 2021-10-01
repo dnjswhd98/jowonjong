@@ -147,19 +147,24 @@
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Constant.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyBridge.h" />
     <ClInclude Include="Enum.h" />
+    <ClInclude Include="Fairy1.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Headers.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Logo.h" />
     <ClInclude Include="MainUpdate.h" />
     <ClInclude Include="MarisaBullet.h" />
+    <ClInclude Include="MarisaLazer.h" />
     <ClInclude Include="MathManager.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerSide.h" />
+    <ClInclude Include="PlayerSide2.h" />
     <ClInclude Include="Prototype.h" />
     <ClInclude Include="RenderManager.h" />
     <ClInclude Include="Resource.h" />
@@ -167,6 +172,7 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="StageBack.h" />
+    <ClInclude Include="StageFront.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -176,21 +182,27 @@
     <ClCompile Include="Bridge.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletBridge.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyBridge.cpp" />
+    <ClCompile Include="Fairy1.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Logo.cpp" />
     <ClCompile Include="MainUpdate.cpp" />
     <ClCompile Include="MarisaBullet.cpp" />
+    <ClCompile Include="MarisaLazer.cpp" />
     <ClCompile Include="MathManager.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerSide.cpp" />
+    <ClCompile Include="PlayerSide2.cpp" />
     <ClCompile Include="Prototype.cpp" />
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="StageBack.cpp" />
+    <ClCompile Include="StageFront.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ApiProject1.rc" />

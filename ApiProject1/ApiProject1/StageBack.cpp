@@ -2,6 +2,12 @@
 
 void StageBack::Initialize()
 {
+	TransInfo.Position = Vector3(0.0f, 0.0f);
+	TransInfo.Direction = Vector3(0.0f, 0.0f);
+	TransInfo.Scale = Vector3(0.0f, 0.0f);
+
+	strKey = "Bullet";
+	Active = false;
 }
 
 int StageBack::Update()
@@ -11,7 +17,13 @@ int StageBack::Update()
 
 void StageBack::Render(HDC _hdc)
 {
-	Rectangle(_hdc, 0, 0, WindowsWidth, WindowsHeight);
+	BitBlt(_hdc,
+		0, 0,
+		WindowsWidth,
+		WindowsHeight,
+		ImageList["BackGround"]->GetMemDC(),
+		0, 0,
+		SRCCOPY);
 }
 
 void StageBack::Release()
