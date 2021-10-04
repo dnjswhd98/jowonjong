@@ -16,6 +16,7 @@ public:
 	virtual Object* Clone()override { return new Bullet(*this); }
 
 	void SetBridge(Bridge* _pBridge) { BridgeObject = _pBridge; }
+
 public:
 	Bullet();
 	Bullet(const Transform& _rTransInfo) : Object(_rTransInfo) { }

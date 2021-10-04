@@ -9,10 +9,7 @@ public:
 	virtual void Render(HDC _hdc)override;
 	virtual void Release()override;
 
-	virtual Object* Clone()
-	{
-		return new StageBack(*this);
-	};
+	virtual Object* Clone() {return new StageBack(*this);}
 
 	StageBack();
 	~StageBack();

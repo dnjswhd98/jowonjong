@@ -5,14 +5,18 @@
 #include "CollisionManager.h"
 
 #include "StageBack.h"
+#include "StageFront.h"
 #include "Player.h"
 #include "PlayerSide.h"
 #include "PlayerSide2.h"
+#include "Enemy.h"
 
 void Stage::Initialize()
 {
 	_StageBack = new StageBack;
 	_StageBack->Initialize();
+	_StageFront = new StageFront;
+	_StageFront->Initialize();
 	_pPSide[0] = new PlayerSide;
 	_pPSide[0]->Initialize();
 	_pPSide[1] = new PlayerSide2;
@@ -20,6 +24,36 @@ void Stage::Initialize()
 
 	_pPlayer = ObjectManager::GetInstance()->GetPlayer();
 	BulletList = ObjectManager::GetInstance()->GetBulletList();
+	EnemyList = ObjectManager::GetInstance()->GetEnemyList();
+
+	//TileHeightCnt = 4;
+	//TileWidthCnt = 4;
+
+	Vector3 Center = Vector3(WindowsWidth / 3.0f, WindowsHeight / 2.0f);
+
+	//for (int y = 0; y < TileHeightCnt; ++y)
+	//{
+	//	for (int x = 0; x < TileWidthCnt; ++x)
+	//	{
+	//		Object* pObj = new Enemy;
+	//		pObj->Initialize();
+	//
+	//		pObj->SetPosition(
+	//			(Center.x - ((TileWidthCnt / 2) * pObj->GetScale().x)) + pObj->GetScale().x * x,
+	//			(Center.y - ((TileHeightCnt / 2) * pObj->GetScale().y)) + pObj->GetScale().y * y);
+	//
+	//		EnemyList->push_back(pObj);
+	//	}
+	//}
+
+	for (int i = 0; i < 1; ++i)
+	{
+		Object* pObj = new Enemy;
+		pObj->Initialize();
+
+		EnemyList->push_back(pObj);
+	}
+
 	ImageList = Object::GetImageList();
 }
 
@@ -33,7 +67,22 @@ void Stage::Update()
 		iter != BulletList->end(); )
 	{
 		int iResult = (*iter)->Update();
-		
+
+		for (vector<Object*>::iterator iter2 = EnemyList->begin();
+			iter2 != EnemyList->end(); )
+		{
+			(*iter2)->Update();
+			if (CollisionManager::EllipseCollision((*iter), (*iter2)))
+			{
+				iter2 = EnemyList->erase(iter2);
+
+				iResult = 1;
+
+				break;
+			}
+			else
+				++iter2;
+		}
 		if (iResult == 1)
 			iter = BulletList->erase(iter);
 		else
@@ -45,15 +94,20 @@ void Stage::Render(HDC _hdc)
 {
 	_StageBack->Render(ImageList["Buffer"]->GetMemDC());
 
-	//_StageBack->Render(_hdc);
-	_pPlayer->Render(ImageList["Buffer"]->GetMemDC());
-	_pPSide[0]->Render(_hdc);
-	_pPSide[1]->Render(_hdc);
+	for (vector<Object*>::iterator iter = EnemyList->begin();
+		iter != EnemyList->end(); ++iter)
+		(*iter)->Render(ImageList["Buffer"]->GetMemDC());
 
 	for (vector<Object*>::iterator iter = BulletList->begin();
 		iter != BulletList->end(); ++iter)
-		(*iter)->Render(_hdc);
+		(*iter)->Render(ImageList["Buffer"]->GetMemDC());
 
+	_pPlayer->Render(ImageList["Buffer"]->GetMemDC());
+	_pPSide[0]->Render(ImageList["Buffer"]->GetMemDC());
+	_pPSide[1]->Render(ImageList["Buffer"]->GetMemDC());
+
+	_StageFront->Render(ImageList["Buffer"]->GetMemDC());
+	
 	BitBlt(_hdc,
 		0, 0,
 		WindowsWidth,

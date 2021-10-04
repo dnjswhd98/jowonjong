@@ -5,6 +5,7 @@ class PlayerSide2 : public Object
 {
 private:
 	bool Fire;
+	int Frame;
 
 	vector<Object*>* BulletList;
 

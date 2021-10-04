@@ -14,6 +14,11 @@ void Logo::Initialize()
 	ImageList["Buffer"] = (new Bitmap)->LoadBmp(L"../Resource/Buffer.bmp");
 	ImageList["BackGround"] = (new Bitmap)->LoadBmp(L"../Resource/BackGround.bmp");
 	ImageList["Marisa"] = (new Bitmap)->LoadBmp(L"../Resource/player01.bmp");
+	ImageList["MarisaSide"] = (new Bitmap)->LoadBmp(L"../Resource/Side.bmp");
+	ImageList["MarisaBullet"] = (new Bitmap)->LoadBmp(L"../Resource/MBullet.bmp");
+	ImageList["MarisaLazer"] = (new Bitmap)->LoadBmp(L"../Resource/Lazer.bmp");
+	ImageList["Enemy"] = (new Bitmap)->LoadBmp(L"../Resource/stg2boss.bmp");
+	ImageList["StageUI"] = (new Bitmap)->LoadBmp(L"../Resource/Ui.bmp");
 
 	Object::SetImageList(ImageList);
 }

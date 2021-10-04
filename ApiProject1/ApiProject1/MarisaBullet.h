@@ -5,10 +5,10 @@ class MarisaBullet : public BulletBridge
 {
 protected:
 	float Speed;
+	Vector3 Offset;
+	map<string, Bitmap*> ImageList;
 
-	Object* _object;
-
-	vector<Object*>* BulletList;
+	Object* _Object;
 public:
 	virtual void Initialize()override;
 	virtual int Update(Transform& _rTransInfo)override;
@@ -18,4 +18,3 @@ public:
 	MarisaBullet();
 	~MarisaBullet();
 };
-

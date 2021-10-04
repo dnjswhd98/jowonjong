@@ -38,6 +38,8 @@ public:
 
 	Vector3 GetScale() { return TransInfo.Scale; }
 
+	Vector3 GetOffset() { return Offset; }
+
 	RECT GetCollider();
 
 	Vector3 GetColliderPosition() { return Collider.Position; }

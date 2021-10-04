@@ -10,21 +10,32 @@
 
 void Player::Initialize()
 {
-	TransInfo.Position = Vector3(WindowsWidth / 2, WindowsHeight / 2);
-	TransInfo.Scale = Vector3(29.0f, 50.0f);
+	TransInfo.Position = Vector3(WindowsWidth / 3, (WindowsHeight / 2) + 150);
+	TransInfo.Scale = Vector3(29.0f, 44.0f);
 
 	Slow = false;
-	Speed = 1.5f;
-	SlowSpeed = 0.5f;
+	Speed = 2.5f;
+	SlowSpeed = 1.5f;
 	Frame = 0;
 
 	strKey = "Marisa";
 
 	BulletList = ObjectManager::GetInstance()->GetBulletList();
+	Time = GetTickCount64();
+	FTime = GetTickCount64();
 }
 
 int Player::Update()
 {
+	if (Time + 100 < GetTickCount64())
+	{
+		if (Frame <= 2)
+			++Frame;
+		else
+			Frame = 0;
+		Time = GetTickCount64();
+	}
+
 	DWORD dwKey = InputManager::GetInstance()->GetKey();		
 
 	if (!GetAsyncKeyState(VK_SHIFT))
@@ -70,17 +81,19 @@ int Player::Update()
 		}
 	}
 
-	if (GetAsyncKeyState('Z'))
+
+	
+	if (GetAsyncKeyState('Z') && FTime + 50 < GetTickCount64())
+	{
 		BulletList->push_back(CreateBullet<MarisaBullet>());
-
-	//Side->SetPosition(TransInfo.Position.x - 100, TransInfo.Position.y);
-
+		FTime = GetTickCount64();
+	}
 	return 0;
 }
 
 void Player::Render(HDC _hdc)
 {
-	TransparentBlt(_hdc, // ** 최종 출력 위치
+	TransparentBlt(_hdc,
 		int(TransInfo.Position.x - (TransInfo.Scale.x / 2) + Offset.x),
 		int(TransInfo.Position.y - (TransInfo.Scale.y / 2) + Offset.y),
 		int(TransInfo.Scale.x),
@@ -91,7 +104,6 @@ void Player::Render(HDC _hdc)
 		int(TransInfo.Scale.x),
 		int(TransInfo.Scale.y),
 		RGB(255, 0, 255));
-
 }
 
 void Player::Release()

@@ -8,6 +8,8 @@ private:
 	float Speed;
 	float SlowSpeed;
 	int Frame;
+	ULONGLONG Time;
+	ULONGLONG FTime;
 
 	vector<Object*>* BulletList;
 	//Object* Side;
