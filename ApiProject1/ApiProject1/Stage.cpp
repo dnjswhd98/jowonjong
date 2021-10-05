@@ -10,6 +10,7 @@
 #include "PlayerSide.h"
 #include "PlayerSide2.h"
 #include "Enemy.h"
+#include "EnemyHpBar.h"
 
 void Stage::Initialize()
 {
@@ -54,14 +55,30 @@ void Stage::Initialize()
 		EnemyList->push_back(pObj);
 	}
 
+	for (int i = 0; i < 200; ++i)
+	{
+		Object* pObj = new EnemyHpBar;
+		pObj->Initialize();
+		pObj->SetPosition(pObj->GetPosition().x + i, pObj->GetPosition().y);
+		EnemyHpL->push_back(pObj);
+	}
+
 	ImageList = Object::GetImageList();
 }
 
 void Stage::Update()
 {
+	_StageBack->Update();
 	_pPlayer->Update();
 	_pPSide[0]->Update();
 	_pPSide[1]->Update();
+
+	for (vector<Object*>::iterator iter2 = EnemyList->begin();
+		iter2 != EnemyList->end(); )
+	{
+		(*iter2)->Update();
+		break;
+	}
 
 	for (vector<Object*>::iterator iter = BulletList->begin();
 		iter != BulletList->end(); )
@@ -71,7 +88,6 @@ void Stage::Update()
 		for (vector<Object*>::iterator iter2 = EnemyList->begin();
 			iter2 != EnemyList->end(); )
 		{
-			(*iter2)->Update();
 			if (CollisionManager::EllipseCollision((*iter), (*iter2)))
 			{
 				iter2 = EnemyList->erase(iter2);
@@ -105,6 +121,10 @@ void Stage::Render(HDC _hdc)
 	_pPlayer->Render(ImageList["Buffer"]->GetMemDC());
 	_pPSide[0]->Render(ImageList["Buffer"]->GetMemDC());
 	_pPSide[1]->Render(ImageList["Buffer"]->GetMemDC());
+
+	for (vector<Object*>::iterator iter = EnemyHpL->begin();
+		iter != EnemyHpL->end(); ++iter)
+		(*iter)->Render(ImageList["Buffer"]->GetMemDC());
 
 	_StageFront->Render(ImageList["Buffer"]->GetMemDC());
 	

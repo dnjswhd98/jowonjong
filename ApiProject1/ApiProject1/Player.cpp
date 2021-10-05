@@ -14,8 +14,8 @@ void Player::Initialize()
 	TransInfo.Scale = Vector3(29.0f, 44.0f);
 
 	Slow = false;
-	Speed = 2.5f;
-	SlowSpeed = 1.5f;
+	Speed = 3.0f;
+	SlowSpeed = 2.0f;
 	Frame = 0;
 
 	strKey = "Marisa";

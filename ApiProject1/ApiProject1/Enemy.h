@@ -7,6 +7,7 @@ class Enemy : public Object
 private:
 	Bridge* BridgeObject;
 	int Frame;
+	int Hp;
 	ULONGLONG Time;
 public:
 	virtual void Initialize()override;
@@ -16,6 +17,8 @@ public:
 
 	virtual Object* Clone()override { return new Enemy(*this); }
 	void SetBridge(Bridge* _pBridge) { BridgeObject = _pBridge; }
+	void SetEnemyHp(int _hp) { Hp = _hp; }
+	int GetEnemyHp() { return Hp; }
 
 	Enemy();
 	Enemy(const Transform& _rTransInfo) : Object(_rTransInfo) { }

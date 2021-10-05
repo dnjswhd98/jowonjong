@@ -88,9 +88,6 @@
     <Filter Include="소스 파일\Object\Bullet\BulletBridge\MarisaLazer">
       <UniqueIdentifier>{f3c55d10-ac22-4495-995d-ec176eade3c7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Object\StageFront">
-      <UniqueIdentifier>{ae7d2376-1927-4eb1-98aa-59ec3d3174fb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\Object\Enemy">
       <UniqueIdentifier>{31ad6842-b0e3-4087-b2ef-15dcd0d3ba92}</UniqueIdentifier>
     </Filter>
@@ -102,6 +99,15 @@
     </Filter>
     <Filter Include="소스 파일\Object\Player\PlayerSide">
       <UniqueIdentifier>{b8db30cf-8b9f-41a7-8abc-4ea4f17e21a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Object\UI">
+      <UniqueIdentifier>{a3dffd49-5a9d-4d41-82b5-21f0af6ed1e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Object\UI\StageFront">
+      <UniqueIdentifier>{ae7d2376-1927-4eb1-98aa-59ec3d3174fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Object\UI\EnemyHpBar">
+      <UniqueIdentifier>{d355368c-79b0-4f5a-b565-cb1eaa8727e6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -205,13 +211,16 @@
       <Filter>소스 파일\Object\Enemy\EnemyBridge\Fairy1</Filter>
     </ClInclude>
     <ClInclude Include="StageFront.h">
-      <Filter>소스 파일\Object\StageFront</Filter>
+      <Filter>소스 파일\Object\UI\StageFront</Filter>
     </ClInclude>
     <ClInclude Include="PlayerSide.h">
       <Filter>소스 파일\Object\Player\PlayerSide</Filter>
     </ClInclude>
     <ClInclude Include="PlayerSide2.h">
       <Filter>소스 파일\Object\Player\PlayerSide</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyHpBar.h">
+      <Filter>소스 파일\Object\UI\EnemyHpBar</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -285,13 +294,16 @@
       <Filter>소스 파일\Object\Enemy\EnemyBridge\Fairy1</Filter>
     </ClCompile>
     <ClCompile Include="StageFront.cpp">
-      <Filter>소스 파일\Object\StageFront</Filter>
+      <Filter>소스 파일\Object\UI\StageFront</Filter>
     </ClCompile>
     <ClCompile Include="PlayerSide.cpp">
       <Filter>소스 파일\Object\Player\PlayerSide</Filter>
     </ClCompile>
     <ClCompile Include="PlayerSide2.cpp">
       <Filter>소스 파일\Object\Player\PlayerSide</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyHpBar.cpp">
+      <Filter>소스 파일\Object\UI\EnemyHpBar</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

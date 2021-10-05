@@ -12,6 +12,7 @@ void Enemy::Initialize()
 	strKey = "Enemy";
 
 	Frame = 0;
+	Hp = 3000;
 	Time = GetTickCount64();
 }
 
@@ -19,7 +20,7 @@ int Enemy::Update()
 {
 	if(Time + 1000 < GetTickCount64())
 	{
-	if (Frame <= 5)
+	if (Frame <= 4)
 		++Frame;
 	else
 		Frame = 0;

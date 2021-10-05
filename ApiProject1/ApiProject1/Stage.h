@@ -7,6 +7,7 @@ class Stage : public Scene
 private:
 	int TileWidthCnt;
 	int TileHeightCnt;
+	int EnemyHp;
 
 	Object* _StageBack;
 	Object* _StageFront;
@@ -15,6 +16,7 @@ private:
 
 	vector<Object*>* BulletList;
 	vector<Object*>* EnemyList;
+	vector<Object*>* EnemyHpL;
 	vector<Object*>* TileList;
 	map<string, Bitmap*> ImageList;
 public:

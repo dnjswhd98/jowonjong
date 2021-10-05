@@ -12,7 +12,7 @@ void Logo::Initialize()
 	ObjectManager::GetInstance()->SetPlayer(ObjectFactory<Player>::CreateObject());
 
 	ImageList["Buffer"] = (new Bitmap)->LoadBmp(L"../Resource/Buffer.bmp");
-	ImageList["BackGround"] = (new Bitmap)->LoadBmp(L"../Resource/BackGround.bmp");
+	ImageList["BackGround"] = (new Bitmap)->LoadBmp(L"../Resource/Stage2BGy2.bmp");
 	ImageList["Marisa"] = (new Bitmap)->LoadBmp(L"../Resource/player01.bmp");
 	ImageList["MarisaSide"] = (new Bitmap)->LoadBmp(L"../Resource/Side.bmp");
 	ImageList["MarisaBullet"] = (new Bitmap)->LoadBmp(L"../Resource/MBullet.bmp");
