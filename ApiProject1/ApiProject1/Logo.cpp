@@ -19,6 +19,8 @@ void Logo::Initialize()
 	ImageList["MarisaLazer"] = (new Bitmap)->LoadBmp(L"../Resource/Lazer.bmp");
 	ImageList["Enemy"] = (new Bitmap)->LoadBmp(L"../Resource/stg2boss.bmp");
 	ImageList["StageUI"] = (new Bitmap)->LoadBmp(L"../Resource/Ui.bmp");
+	ImageList["HpBar"] = (new Bitmap)->LoadBmp(L"../Resource/hpbar4.bmp");
+	ImageList["EnemyFont"] = (new Bitmap)->LoadBmp(L"../Resource/Enemy.bmp");
 
 	Object::SetImageList(ImageList);
 }

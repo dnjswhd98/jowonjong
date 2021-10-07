@@ -33,6 +33,10 @@ public:
 	void SetPosition(Vector3 _position) { TransInfo.Position = _position; }
 
 	void SetPosition(float _x, float _y) { TransInfo.Position.x = _x; TransInfo.Position.y = _y; }
+
+	void SetScale(Vector3 _position) { TransInfo.Scale = _position; }
+
+	void SetScale(float _x, float _y) { TransInfo.Scale.x = _x; TransInfo.Scale.y = _y; }
 	
 	Vector3 GetPosition() { return TransInfo.Position; }
 
@@ -48,6 +52,7 @@ public:
 	void SetColliderPosition(float _x, float _y) { Collider.Position.x = _x; Collider.Position.y = _y; }
 
 	float GetRectTop() { return TransInfo.Position.y - (TransInfo.Scale.y / 2); }
+	float GetRectRight() { return TransInfo.Position.x + (TransInfo.Scale.x / 2); }
 
 	bool GetActive() const { return Active; }
 

@@ -109,6 +109,9 @@
     <Filter Include="소스 파일\Object\UI\EnemyHpBar">
       <UniqueIdentifier>{d355368c-79b0-4f5a-b565-cb1eaa8727e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Manager\ScoreManager">
+      <UniqueIdentifier>{608dbfcc-7e3e-4d2c-88b7-1628a7329399}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainUpdate.h">
@@ -222,6 +225,9 @@
     <ClInclude Include="EnemyHpBar.h">
       <Filter>소스 파일\Object\UI\EnemyHpBar</Filter>
     </ClInclude>
+    <ClInclude Include="ScoreManager.h">
+      <Filter>소스 파일\Manager\ScoreManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ApiProject1.cpp">
@@ -304,6 +310,9 @@
     </ClCompile>
     <ClCompile Include="EnemyHpBar.cpp">
       <Filter>소스 파일\Object\UI\EnemyHpBar</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreManager.cpp">
+      <Filter>소스 파일\Manager\ScoreManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

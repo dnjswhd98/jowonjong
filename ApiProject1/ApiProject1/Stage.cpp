@@ -22,6 +22,8 @@ void Stage::Initialize()
 	_pPSide[0]->Initialize();
 	_pPSide[1] = new PlayerSide2;
 	_pPSide[1]->Initialize();
+	_EnemyHpBar = new EnemyHpBar;
+	_EnemyHpBar->Initialize();
 
 	_pPlayer = ObjectManager::GetInstance()->GetPlayer();
 	BulletList = ObjectManager::GetInstance()->GetBulletList();
@@ -55,13 +57,9 @@ void Stage::Initialize()
 		EnemyList->push_back(pObj);
 	}
 
-	for (int i = 0; i < 200; ++i)
-	{
-		Object* pObj = new EnemyHpBar;
-		pObj->Initialize();
-		pObj->SetPosition(pObj->GetPosition().x + i, pObj->GetPosition().y);
-		EnemyHpL->push_back(pObj);
-	}
+	EnemyHp = 1000;
+	EnemyHpMax = EnemyHp;
+	MaxHpBar = _EnemyHpBar->GetScale().x;
 
 	ImageList = Object::GetImageList();
 }
@@ -72,6 +70,8 @@ void Stage::Update()
 	_pPlayer->Update();
 	_pPSide[0]->Update();
 	_pPSide[1]->Update();
+
+	float MinusHpBar = MaxHpBar / EnemyHpMax;
 
 	for (vector<Object*>::iterator iter2 = EnemyList->begin();
 		iter2 != EnemyList->end(); )
@@ -90,7 +90,15 @@ void Stage::Update()
 		{
 			if (CollisionManager::EllipseCollision((*iter), (*iter2)))
 			{
-				iter2 = EnemyList->erase(iter2);
+				EnemyHp--;
+				if (EnemyHp <= 0)
+				{
+					iter2 = EnemyList->erase(iter2);
+					_EnemyHpBar->SetScale(_EnemyHpBar->GetScale().x - MinusHpBar, _EnemyHpBar->GetScale().y);
+				}
+				else
+					_EnemyHpBar->SetScale(_EnemyHpBar->GetScale().x - MinusHpBar, _EnemyHpBar->GetScale().y);
+					
 
 				iResult = 1;
 
@@ -113,20 +121,18 @@ void Stage::Render(HDC _hdc)
 	for (vector<Object*>::iterator iter = EnemyList->begin();
 		iter != EnemyList->end(); ++iter)
 		(*iter)->Render(ImageList["Buffer"]->GetMemDC());
-
+	
 	for (vector<Object*>::iterator iter = BulletList->begin();
 		iter != BulletList->end(); ++iter)
 		(*iter)->Render(ImageList["Buffer"]->GetMemDC());
-
+	
 	_pPlayer->Render(ImageList["Buffer"]->GetMemDC());
 	_pPSide[0]->Render(ImageList["Buffer"]->GetMemDC());
 	_pPSide[1]->Render(ImageList["Buffer"]->GetMemDC());
-
-	for (vector<Object*>::iterator iter = EnemyHpL->begin();
-		iter != EnemyHpL->end(); ++iter)
-		(*iter)->Render(ImageList["Buffer"]->GetMemDC());
-
+	
 	_StageFront->Render(ImageList["Buffer"]->GetMemDC());
+	
+	_EnemyHpBar->Render(ImageList["Buffer"]->GetMemDC());
 	
 	BitBlt(_hdc,
 		0, 0,

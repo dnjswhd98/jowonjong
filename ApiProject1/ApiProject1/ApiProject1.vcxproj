@@ -171,6 +171,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="ScoreManager.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="StageBack.h" />
     <ClInclude Include="StageFront.h" />
@@ -202,6 +203,7 @@
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="ScoreManager.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="StageBack.cpp" />
     <ClCompile Include="StageFront.cpp" />

@@ -2,8 +2,8 @@
 
 void EnemyHpBar::Initialize()
 {
-	TransInfo.Position = Vector3(200, 150);
-	TransInfo.Scale = Vector3(1, 15);
+	TransInfo.Position = Vector3(100, 20);
+	TransInfo.Scale = Vector3(280, 5);
 
 	Active = false;
 	strKey = "HpBar";
@@ -17,9 +17,9 @@ int EnemyHpBar::Update()
 void EnemyHpBar::Render(HDC _hdc)
 {
 	TransparentBlt(_hdc,
-		int(TransInfo.Position.x - (TransInfo.Scale.x / 2) + Offset.x),
-		int(TransInfo.Position.y - (TransInfo.Scale.y / 2) + Offset.y),
-		int(TransInfo.Scale.x),
+		int(TransInfo.Position.x),
+		int(TransInfo.Position.y - (TransInfo.Scale.y / 2)),
+		float(TransInfo.Scale.x),
 		int(TransInfo.Scale.y),
 		ImageList[strKey]->GetMemDC(),
 		int(TransInfo.Scale.x * 0),

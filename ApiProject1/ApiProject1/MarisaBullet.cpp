@@ -3,7 +3,7 @@
 
 void MarisaBullet::Initialize()
 {
-	Speed = 7.0f;
+	Speed = 5.0f;
 	DrawKey = "MarisaBullet";
 }
 

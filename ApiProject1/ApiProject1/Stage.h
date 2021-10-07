@@ -8,15 +8,18 @@ private:
 	int TileWidthCnt;
 	int TileHeightCnt;
 	int EnemyHp;
+	int EnemyHpMax;
+	float MaxHpBar;
+	float count;
 
 	Object* _StageBack;
 	Object* _StageFront;
 	Object* _pPlayer;
 	Object* _pPSide[2];
+	Object* _EnemyHpBar;
 
 	vector<Object*>* BulletList;
 	vector<Object*>* EnemyList;
-	vector<Object*>* EnemyHpL;
 	vector<Object*>* TileList;
 	map<string, Bitmap*> ImageList;
 public:

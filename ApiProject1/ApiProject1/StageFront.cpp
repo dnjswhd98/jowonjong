@@ -26,6 +26,18 @@ void StageFront::Render(HDC _hdc)
 		int(TransInfo.Scale.x),
 		int(TransInfo.Scale.y),
 		RGB(255, 0, 255));
+
+	TransparentBlt(_hdc,
+		int(30),
+		int(10),
+		int(46),
+		int(16),
+		ImageList["EnemyFont"]->GetMemDC(),
+		int(0),
+		int(0),
+		int(46),
+		int(16),
+		RGB(255, 0, 255));
 }
 
 void StageFront::Release()
