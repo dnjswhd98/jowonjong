@@ -4,6 +4,7 @@
 #include "SceneManager.h"
 #include "ObjectManager.h"
 #include "ObjectFactory.h"
+#include "ScoreManager.h"
 
 void Logo::Initialize()
 {
@@ -21,6 +22,9 @@ void Logo::Initialize()
 	ImageList["StageUI"] = (new Bitmap)->LoadBmp(L"../Resource/Ui.bmp");
 	ImageList["HpBar"] = (new Bitmap)->LoadBmp(L"../Resource/hpbar4.bmp");
 	ImageList["EnemyFont"] = (new Bitmap)->LoadBmp(L"../Resource/Enemy.bmp");
+	ImageList["ScoreFont"] = (new Bitmap)->LoadBmp(L"../Resource/ScoreF.bmp");
+
+	ScoreManager::GetInstance()->SetImage((new Bitmap)->LoadBmp(L"../Resource/Score.bmp"));
 
 	Object::SetImageList(ImageList);
 }

@@ -3,6 +3,7 @@
 #include "ObjectManager.h"
 #include "ObjectFactory.h"
 #include "CollisionManager.h"
+#include "ScoreManager.h"
 
 #include "StageBack.h"
 #include "StageFront.h"
@@ -28,26 +29,8 @@ void Stage::Initialize()
 	_pPlayer = ObjectManager::GetInstance()->GetPlayer();
 	BulletList = ObjectManager::GetInstance()->GetBulletList();
 	EnemyList = ObjectManager::GetInstance()->GetEnemyList();
-
-	//TileHeightCnt = 4;
-	//TileWidthCnt = 4;
-
-	Vector3 Center = Vector3(WindowsWidth / 3.0f, WindowsHeight / 2.0f);
-
-	//for (int y = 0; y < TileHeightCnt; ++y)
-	//{
-	//	for (int x = 0; x < TileWidthCnt; ++x)
-	//	{
-	//		Object* pObj = new Enemy;
-	//		pObj->Initialize();
-	//
-	//		pObj->SetPosition(
-	//			(Center.x - ((TileWidthCnt / 2) * pObj->GetScale().x)) + pObj->GetScale().x * x,
-	//			(Center.y - ((TileHeightCnt / 2) * pObj->GetScale().y)) + pObj->GetScale().y * y);
-	//
-	//		EnemyList->push_back(pObj);
-	//	}
-	//}
+	
+	//Vector3 Center = Vector3(WindowsWidth / 3.0f, WindowsHeight / 2.0f);
 
 	for (int i = 0; i < 1; ++i)
 	{
@@ -60,13 +43,17 @@ void Stage::Initialize()
 	EnemyHp = 1000;
 	EnemyHpMax = EnemyHp;
 	MaxHpBar = _EnemyHpBar->GetScale().x;
+	S = 0;
+	ScoreManager::GetInstance()->SetScore(S);
 
 	ImageList = Object::GetImageList();
 }
 
 void Stage::Update()
 {
+	
 	_StageBack->Update();
+	_StageFront->Update();
 	_pPlayer->Update();
 	_pPSide[0]->Update();
 	_pPSide[1]->Update();
@@ -95,9 +82,15 @@ void Stage::Update()
 				{
 					iter2 = EnemyList->erase(iter2);
 					_EnemyHpBar->SetScale(_EnemyHpBar->GetScale().x - MinusHpBar, _EnemyHpBar->GetScale().y);
+					S += 50010;
+					ScoreManager::GetInstance()->SetScore(S);
 				}
 				else
+				{
 					_EnemyHpBar->SetScale(_EnemyHpBar->GetScale().x - MinusHpBar, _EnemyHpBar->GetScale().y);
+					S += 10;
+					ScoreManager::GetInstance()->SetScore(S);
+				}
 					
 
 				iResult = 1;

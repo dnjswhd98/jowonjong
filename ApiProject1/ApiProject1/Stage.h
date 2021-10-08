@@ -5,10 +5,9 @@ class Object;
 class Stage : public Scene
 {
 private:
-	int TileWidthCnt;
-	int TileHeightCnt;
 	int EnemyHp;
 	int EnemyHpMax;
+	int S;
 	float MaxHpBar;
 	float count;
 

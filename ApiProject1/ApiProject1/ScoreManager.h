@@ -18,11 +18,14 @@ private:
 	vector<int> NumberList;
 	//list<int> NumberList;
 	Bitmap* Image;
+	Vector3 Position;
+	int Frame[9];
 public:
 	void Initialize();
 	UINT GetScore() { return Score; }
 	void SetScore(int _Score) { Score = _Score; }
 	void SetImage(Bitmap* _Image) { Image = _Image; }
+	void SetScorePosition(Vector3 _position) { Position = _position; }
 
 	vector<int>* GetScoreNumber() { return &NumberList; }
 
