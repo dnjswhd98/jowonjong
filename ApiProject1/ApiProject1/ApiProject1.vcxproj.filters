@@ -112,6 +112,9 @@
     <Filter Include="소스 파일\Manager\ScoreManager">
       <UniqueIdentifier>{608dbfcc-7e3e-4d2c-88b7-1628a7329399}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Object\Bullet\BulletBridge\EnemyBullet">
+      <UniqueIdentifier>{c51924dd-1984-477d-b0de-ba87d7c95fc6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainUpdate.h">
@@ -228,6 +231,9 @@
     <ClInclude Include="ScoreManager.h">
       <Filter>소스 파일\Manager\ScoreManager</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyBullet.h">
+      <Filter>소스 파일\Object\Bullet\BulletBridge\EnemyBullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ApiProject1.cpp">
@@ -313,6 +319,9 @@
     </ClCompile>
     <ClCompile Include="ScoreManager.cpp">
       <Filter>소스 파일\Manager\ScoreManager</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBullet.cpp">
+      <Filter>소스 파일\Object\Bullet\BulletBridge\EnemyBullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

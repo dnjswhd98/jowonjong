@@ -4,7 +4,7 @@ ScoreManager* ScoreManager::Instance = nullptr;
 
 void ScoreManager::Initialize()
 {
-	for(int i = 0;i<8;++i)
+	for(int i = 0;i<9;++i)
 		Frame[i] = 0;
 }
 
@@ -14,8 +14,8 @@ void ScoreManager::MakeScoreNumber()
 
 	while (Score > 0)
 	{
-		int iTemp[9];
-		for (int i = 0; i < 8; ++i)
+		int iTemp[10];
+		for (int i = 0; i < 9; ++i)
 		{
 			iTemp[i] = int(Score % 10);
 			Score /= 10;
@@ -33,19 +33,19 @@ void ScoreManager::MakeScoreNumber()
 
 void ScoreManager::Render(HDC _hdc)
 {
-	for (int i = 0; i < 8; ++i)
+	for (int i = 0; i < 9; ++i)
 	{
 		TransparentBlt(_hdc,
-			int(Position.x - (20*i)),
+			int(Position.x - (16*i)),
 			int(Position.y),
-			int(20),
 			int(18),
+			int(14),
 			Image->GetMemDC(),
-			int(20 * Frame[i]),
+			int(18 * Frame[i]),
 			int(0),
-			int(20),
 			int(18),
-			RGB(255, 0, 255));
+			int(14),
+			RGB(0, 0, 0));
 	}
 	
 }

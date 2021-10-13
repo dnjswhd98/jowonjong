@@ -3,6 +3,7 @@
 #include "MathManager.h"
 #include "MarisaBullet.h"
 #include "MarisaLazer.h"
+#include "EnemyBullet.h"
 
 void Bullet::Initialize()
 {

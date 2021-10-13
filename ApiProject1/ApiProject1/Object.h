@@ -33,6 +33,8 @@ public:
 	void SetPosition(Vector3 _position) { TransInfo.Position = _position; }
 
 	void SetPosition(float _x, float _y) { TransInfo.Position.x = _x; TransInfo.Position.y = _y; }
+	
+	void SetDirection(float _x, float _y) { TransInfo.Direction.x = _x; TransInfo.Direction.y = _y; }
 
 	void SetScale(Vector3 _position) { TransInfo.Scale = _position; }
 

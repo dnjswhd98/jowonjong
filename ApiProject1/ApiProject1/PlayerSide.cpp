@@ -18,6 +18,10 @@ void PlayerSide::Initialize()
 
 	strKey = "MarisaSide";
 	Frame = 0;
+	minusX = 4.0f;
+	minusY = 20.0f;
+
+	time = GetTickCount64();
 }
 
 int PlayerSide::Update()
@@ -32,18 +36,36 @@ int PlayerSide::Update()
 	else
 		Fire = false;
 
-	TransInfo.Position = Vector3(_pPlayer->GetPosition().x - 30, _pPlayer->GetPosition().y);
+	if (GetAsyncKeyState(VK_SHIFT))
+	{
+		if (time + 50 < GetTickCount64())
+		{
+			++count;
+			time = GetTickCount64();
+		}
+
+		if (count < 2)
+		{
+			TransInfo.Position.x += minusX;
+			TransInfo.Position.y -= minusY;
+			minusY /= 2;
+		}
+		else
+			TransInfo.Position = Vector3(_pPlayer->GetPosition().x - 9, _pPlayer->GetPosition().y - 37);
+	}
+	else
+	{
+		TransInfo.Position = Vector3(_pPlayer->GetPosition().x - 30, _pPlayer->GetPosition().y);
+		minusX = 4.0f;
+		minusY = 20.0f;
+		count = 0;
+	}
 
 	return 0;
 }
 
 void PlayerSide::Render(HDC _hdc)
 {
-	//Ellipse(_hdc,
-	//	int(TransInfo.Position.x - (TransInfo.Scale.x / 2)),
-	//	int(TransInfo.Position.y - (TransInfo.Scale.y / 2)),
-	//	int(TransInfo.Position.x + (TransInfo.Scale.x / 2)),
-	//	int(TransInfo.Position.y + (TransInfo.Scale.y / 2)));
 	TransparentBlt(_hdc,
 		int(TransInfo.Position.x - (TransInfo.Scale.x / 2) + Offset.x),
 		int(TransInfo.Position.y - (TransInfo.Scale.y / 2) + Offset.y),

@@ -3,6 +3,9 @@
 #include "ObjectFactory.h"
 #include "Bridge.h"
 
+#include "Bullet.h"
+#include "EnemyBullet.h"
+
 void Enemy::Initialize()
 {
 	TransInfo.Position = Vector3(WindowsWidth / 3, 150);
@@ -12,32 +15,46 @@ void Enemy::Initialize()
 	strKey = "Enemy";
 
 	Frame = 0;
-	Hp = 3000;
+	Count = 0;
 	Time = GetTickCount64();
+	FTime = GetTickCount64();
+	BulletList = ObjectManager::GetInstance()->GetBulletList();
 }
 
 int Enemy::Update()
 {
-	if(Time + 1000 < GetTickCount64())
+	if (FTime + 1000 < GetTickCount64())
 	{
-	if (Frame <= 4)
-		++Frame;
-	else
-		Frame = 0;
-	Time = GetTickCount64();
+		for (int i = 0; i < 25; ++i)
+		{
+			float _pi = PI;
+			float cx = sinf(((14.4 * i) * _pi / 180));
+			float cy = cosf(((14.4 * i) * _pi / 180));
+			TransInfo.Direction = Vector3(cx * 2, cy * 2);
+			BulletList->push_back(CreateBullet<EnemyBullet>());
+		}
+
+		FTime = GetTickCount64();
+
 	}
+
+	//if(Time + 1 < GetTickCount64())
+	//for(int i = 0; i < 15; ++i)
+	//{
+	//	float _pi = PI;
+	//	float cx = sinf((i * _pi / 180));
+	//	float cy = cosf((i * _pi / 180));
+	//	TransInfo.Direction = Vector3(cx * 2, cy * 2);
+	//	Time = GetTickCount64();
+	//	
+	//}
+
 
 	return 0;
 }
 
 void Enemy::Render(HDC _hdc)
 {
-	//Ellipse(_hdc,
-	//	int(TransInfo.Position.x - (TransInfo.Scale.x / 2)),
-	//	int(TransInfo.Position.y - (TransInfo.Scale.y / 2)),
-	//	int(TransInfo.Position.x + (TransInfo.Scale.x / 2)),
-	//	int(TransInfo.Position.y + (TransInfo.Scale.y / 2)));
-
 	TransparentBlt(_hdc,
 		int(TransInfo.Position.x - (TransInfo.Scale.x / 2) + Offset.x),
 		int(TransInfo.Position.y - (TransInfo.Scale.y / 2) + Offset.y),
@@ -66,4 +83,14 @@ Enemy::Enemy()
 
 Enemy::~Enemy()
 {
+}
+
+template<typename T>
+inline Object* Enemy::CreateBullet()
+{
+	Bridge* pBridge = new T;
+
+	Object* pBullet = ObjectFactory<Bullet>::CreateObject(TransInfo.Position, TransInfo.Direction.x, TransInfo.Direction.y, pBridge);
+
+	return pBullet;
 }

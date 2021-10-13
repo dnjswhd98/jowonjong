@@ -15,9 +15,15 @@ void PlayerSide2::Initialize()
 	TransInfo.Position = Vector3(_pPlayer->GetPosition().x + 30, _pPlayer->GetPosition().y);
 	TransInfo.Scale = Vector3(14.0f, 14.0f);
 
-	strKey = "MarisaSide";
-
 	BulletList = ObjectManager::GetInstance()->GetBulletList();
+
+	strKey = "MarisaSide";
+	Frame = 0;
+	minusX = 4.0f;
+	minusY = 20.0f;
+
+	time = GetTickCount64();
+
 }
 
 int PlayerSide2::Update()
@@ -32,7 +38,30 @@ int PlayerSide2::Update()
 	else
 		Fire = false;
 
-	TransInfo.Position = Vector3(_pPlayer->GetPosition().x + 30, _pPlayer->GetPosition().y);
+	if (GetAsyncKeyState(VK_SHIFT))
+	{
+		if (time + 50 < GetTickCount64())
+		{
+			++count;
+			time = GetTickCount64();
+		}
+
+		if (count < 2)
+		{
+			TransInfo.Position.x -= minusX;
+			TransInfo.Position.y -= minusY;
+			minusY /= 2;
+		}
+		else
+			TransInfo.Position = Vector3(_pPlayer->GetPosition().x + 9, _pPlayer->GetPosition().y - 37);
+	}
+	else
+	{
+		TransInfo.Position = Vector3(_pPlayer->GetPosition().x + 30, _pPlayer->GetPosition().y);
+		minusX = 4.0f;
+		minusY = 20.0f;
+		count = 0;
+	}
 
 	return 0;
 }

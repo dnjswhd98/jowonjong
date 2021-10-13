@@ -47,12 +47,28 @@ public:
 		return pObj;
 	}
 
-	static Object* CreateObject(float _x, float _y, Bridge* pBridge)
+	static Object* c(float _x, float _y, Bridge* pBridge)
 	{
 		Object* pObj = new T;
 
 		pObj->Initialize();
 		pObj->SetPosition(_x, _y);
+
+		pBridge->SetObject(pObj);
+		pBridge->Initialize();
+
+		((T*)pObj)->SetBridge(pBridge);
+
+		return pObj;
+	}
+
+	static Object* CreateObject(Vector3 _vPos, float _Dx, float _Dy, Bridge* pBridge)
+	{
+		Object* pObj = new T;
+
+		pObj->Initialize();
+		pObj->SetPosition(_vPos);
+		pObj->SetDirection(_Dx, _Dy);
 
 		pBridge->SetObject(pObj);
 		pBridge->Initialize();

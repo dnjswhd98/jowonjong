@@ -12,7 +12,7 @@ int MarisaBullet::Update(Transform& _rTransInfo)
 	_rTransInfo.Position.x += _rTransInfo.Direction.x * Speed;
 	_rTransInfo.Position.y += _rTransInfo.Direction.y * Speed;
 
-	if (_rTransInfo.Position.x >= (WindowsWidth - 100))
+	if (_rTransInfo.Position.y <= (-100))
 		return 1;
 
 	return 0;
@@ -20,12 +20,6 @@ int MarisaBullet::Update(Transform& _rTransInfo)
 
 void MarisaBullet::Render(HDC _hdc)
 {
-	//Ellipse(_hdc,
-	//	int(RealObject->GetPosition().x - (RealObject->GetScale().x / 2)),
-	//	int(RealObject->GetPosition().y - (RealObject->GetScale().y / 2)),
-	//	int(RealObject->GetPosition().x + (RealObject->GetScale().x / 2)),
-	//	int(RealObject->GetPosition().y + (RealObject->GetScale().y / 2)));
-
 	ImageList = Object::GetImageList();
 	TransparentBlt(_hdc,
 		int(RealObject->GetPosition().x - 7),

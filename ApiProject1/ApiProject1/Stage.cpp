@@ -72,9 +72,15 @@ void Stage::Update()
 	{
 		int iResult = (*iter)->Update();
 
+
 		for (vector<Object*>::iterator iter2 = EnemyList->begin();
 			iter2 != EnemyList->end(); )
 		{
+			if ((*iter)->Update() == 3)
+			{
+				break;
+			}
+
 			if (CollisionManager::EllipseCollision((*iter), (*iter2)))
 			{
 				EnemyHp--;

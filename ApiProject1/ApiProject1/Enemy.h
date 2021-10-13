@@ -7,8 +7,11 @@ class Enemy : public Object
 private:
 	Bridge* BridgeObject;
 	int Frame;
-	int Hp;
+	int Count;
 	ULONGLONG Time;
+	ULONGLONG FTime;
+
+	vector<Object*>* BulletList;
 public:
 	virtual void Initialize()override;
 	virtual int Update()override;
@@ -17,8 +20,9 @@ public:
 
 	virtual Object* Clone()override { return new Enemy(*this); }
 	void SetBridge(Bridge* _pBridge) { BridgeObject = _pBridge; }
-	void SetEnemyHp(int _hp) { Hp = _hp; }
-	int GetEnemyHp() { return Hp; }
+
+	template<typename T>
+	Object* CreateBullet();
 
 	Enemy();
 	Enemy(const Transform& _rTransInfo) : Object(_rTransInfo) { }

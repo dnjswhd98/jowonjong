@@ -6,6 +6,10 @@ class PlayerSide2 : public Object
 private:
 	bool Fire;
 	int Frame;
+	int count;
+	float minusX;
+	float minusY;
+	ULONGLONG time;
 
 	vector<Object*>* BulletList;
 

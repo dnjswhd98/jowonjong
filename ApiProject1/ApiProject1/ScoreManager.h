@@ -19,7 +19,7 @@ private:
 	//list<int> NumberList;
 	Bitmap* Image;
 	Vector3 Position;
-	int Frame[9];
+	int Frame[10];
 public:
 	void Initialize();
 	UINT GetScore() { return Score; }
