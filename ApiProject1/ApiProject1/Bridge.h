@@ -6,6 +6,8 @@ class Bridge
 {
 protected:
 	string DrawKey;
+	int FrameX;
+	int FrameY;
 	Object* RealObject;
 public:
 	virtual void Initialize()PURE;
@@ -14,6 +16,7 @@ public:
 	virtual void Release()PURE;
 public:
 	void SetObject(Object* _pObject) { RealObject = _pObject; }
+	void SetFrame(float _x, float _y) { FrameX = _x, FrameY = _y; }
 public:
 	Bridge();
 	virtual ~Bridge();

@@ -1,10 +1,13 @@
 #include "Enemy.h"
 #include "ObjectManager.h"
 #include "ObjectFactory.h"
+#include "MathManager.h"
 #include "Bridge.h"
 
+#include "Player.h"
 #include "Bullet.h"
 #include "EnemyBullet.h"
+#include "EnemyBullet2.h"
 
 void Enemy::Initialize()
 {
@@ -14,40 +17,54 @@ void Enemy::Initialize()
 	Active = false;
 	strKey = "Enemy";
 
-	Frame = 0;
+	EnemyFrame = 0;
 	Count = 0;
+	Life = 3;
 	Time = GetTickCount64();
 	FTime = GetTickCount64();
 	BulletList = ObjectManager::GetInstance()->GetBulletList();
+	_pPlayer = ObjectManager::GetInstance()->GetPlayer();
 }
 
 int Enemy::Update()
 {
-	if (FTime + 1000 < GetTickCount64())
+
+	if (FTime + 500 < GetTickCount64())
 	{
-		for (int i = 0; i < 25; ++i)
+		if (Count < 3)
 		{
-			float _pi = PI;
-			float cx = sinf(((14.4 * i) * _pi / 180));
-			float cy = cosf(((14.4 * i) * _pi / 180));
-			TransInfo.Direction = Vector3(cx * 2, cy * 2);
-			BulletList->push_back(CreateBullet<EnemyBullet>());
+			for (int i = 0; i < 25; ++i)
+			{
+
+				float _pi = PI;
+				float cx = sinf(((14.4 * i) * _pi / 180));
+				float cy = cosf(((14.4 * i) * _pi / 180));
+				if (Count < 2)
+				{
+					FrameX = 8;
+					FrameY = 2;
+					TransInfo.Direction = Vector3(cx / 2, cy / 2);
+					BulletList->push_back(CreateBullet<EnemyBullet>());
+
+				}
+				else
+				{
+					FrameX = 0;
+					FrameY = 0;
+					TransInfo.Direction = Vector3(cx / 2, cy / 2);
+					BulletList->push_back(CreateBullet<EnemyBullet2>());
+				}
+			}
 		}
+		else if (Count == 4)
+			Count = -1;
+		else;
 
+		++Count;
 		FTime = GetTickCount64();
-
 	}
 
-	//if(Time + 1 < GetTickCount64())
-	//for(int i = 0; i < 15; ++i)
-	//{
-	//	float _pi = PI;
-	//	float cx = sinf((i * _pi / 180));
-	//	float cy = cosf((i * _pi / 180));
-	//	TransInfo.Direction = Vector3(cx * 2, cy * 2);
-	//	Time = GetTickCount64();
-	//	
-	//}
+	
 
 
 	return 0;
@@ -61,7 +78,7 @@ void Enemy::Render(HDC _hdc)
 		int(TransInfo.Scale.x),
 		int(TransInfo.Scale.y),
 		ImageList[strKey]->GetMemDC(),
-		int(TransInfo.Scale.x * Frame),
+		int(TransInfo.Scale.x * EnemyFrame),
 		int(TransInfo.Scale.y * 0),
 		int(TransInfo.Scale.x),
 		int(TransInfo.Scale.y),
@@ -90,7 +107,7 @@ inline Object* Enemy::CreateBullet()
 {
 	Bridge* pBridge = new T;
 
-	Object* pBullet = ObjectFactory<Bullet>::CreateObject(TransInfo.Position, TransInfo.Direction.x, TransInfo.Direction.y, pBridge);
+	Object* pBullet = ObjectFactory<Bullet>::CreateObject(TransInfo.Position, TransInfo.Direction.x, TransInfo.Direction.y, FrameX, FrameY, pBridge);
 
 	return pBullet;
 }

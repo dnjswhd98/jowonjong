@@ -150,12 +150,16 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyBridge.h" />
     <ClInclude Include="EnemyBullet.h" />
+    <ClInclude Include="EnemyBullet2.h" />
     <ClInclude Include="EnemyHpBar.h" />
     <ClInclude Include="Enum.h" />
     <ClInclude Include="Fairy1.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="GrazeZone.h" />
     <ClInclude Include="Headers.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemNum.h" />
     <ClInclude Include="Logo.h" />
     <ClInclude Include="MainUpdate.h" />
     <ClInclude Include="MarisaBullet.h" />
@@ -165,6 +169,7 @@
     <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerBome.h" />
     <ClInclude Include="PlayerSide.h" />
     <ClInclude Include="PlayerSide2.h" />
     <ClInclude Include="Prototype.h" />
@@ -188,9 +193,13 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyBridge.cpp" />
     <ClCompile Include="EnemyBullet.cpp" />
+    <ClCompile Include="EnemyBullet2.cpp" />
     <ClCompile Include="EnemyHpBar.cpp" />
     <ClCompile Include="Fairy1.cpp" />
+    <ClCompile Include="GrazeZone.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemNum.cpp" />
     <ClCompile Include="Logo.cpp" />
     <ClCompile Include="MainUpdate.cpp" />
     <ClCompile Include="MarisaBullet.cpp" />
@@ -199,6 +208,7 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerBome.cpp" />
     <ClCompile Include="PlayerSide.cpp" />
     <ClCompile Include="PlayerSide2.cpp" />
     <ClCompile Include="Prototype.cpp" />

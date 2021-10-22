@@ -49,3 +49,4 @@ void ScoreManager::Render(HDC _hdc)
 	}
 	
 }
+

@@ -8,13 +8,14 @@
 void Bullet::Initialize()
 {
 	TransInfo.Position = Vector3(0.0f, 0.0f);
-	TransInfo.Direction = Vector3(0.0f, (-3.0f));
+	TransInfo.Direction = Vector3(0.0f, (-2.0f));
 	TransInfo.Scale = Vector3(15.0f, 15.0f);
 
 	BridgeObject = NULL;
 
 	strKey = "Bullet";
 	Active = false;
+	Life = 1;
 }
 
 int Bullet::Update()

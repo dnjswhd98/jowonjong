@@ -8,17 +8,26 @@ private:
 	int EnemyHp;
 	int EnemyHpMax;
 	int S;
+	int playerLife;
 	float MaxHpBar;
 	float count;
+	ULONGLONG _BTime;
+	Vector3 Epos;
 
 	Object* _StageBack;
 	Object* _StageFront;
 	Object* _pPlayer;
 	Object* _pPSide[2];
 	Object* _EnemyHpBar;
+	Object* _PlayerBome;
+	Object* _PowerN;
+	Object* _ScoreIN;
+	Object* _GrazeN;
+	Object* _GrazeZone;
 
 	vector<Object*>* BulletList;
 	vector<Object*>* EnemyList;
+	vector<Object*>* ItemList;
 	vector<Object*>* TileList;
 	map<string, Bitmap*> ImageList;
 public:

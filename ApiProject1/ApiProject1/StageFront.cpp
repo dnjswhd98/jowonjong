@@ -1,5 +1,6 @@
 #include "StageFront.h"
 #include "ScoreManager.h"
+#include "ItemNum.h"
 
 void StageFront::Initialize()
 {
@@ -8,8 +9,6 @@ void StageFront::Initialize()
 
 	ScoreManager::GetInstance()->SetScorePosition(Vector3(600, 60));
 	ScoreManager::GetInstance()->Initialize();
-		
-	
 
 	strKey = "StageUI";
 }
@@ -120,6 +119,18 @@ void StageFront::Render(HDC _hdc)
 		int(0),
 		int(13),
 		int(13),
+		RGB(0, 0, 0));
+
+	TransparentBlt(_hdc,
+		int(430),
+		int(260),
+		int(161),
+		int(182),
+		ImageList["inGameLogo"]->GetMemDC(),
+		int(0),
+		int(0),
+		int(161),
+		int(182),
 		RGB(0, 0, 0));
 #pragma endregion
 }

@@ -6,10 +6,14 @@ class Enemy : public Object
 {
 private:
 	Bridge* BridgeObject;
-	int Frame;
+	int EnemyFrame;
+	int FrameX;
+	int FrameY;
 	int Count;
 	ULONGLONG Time;
 	ULONGLONG FTime;
+
+	Object* _pPlayer;
 
 	vector<Object*>* BulletList;
 public:

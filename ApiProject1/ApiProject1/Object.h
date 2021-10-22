@@ -12,6 +12,11 @@ protected:
 
 	string strKey;
 	bool Active;
+	int Life;
+	int Power;
+	int Bomb;
+	int Item;
+	int Graze;
 	float Speed;
 
 	static map<string, Bitmap*>ImageList;
@@ -39,6 +44,18 @@ public:
 	void SetScale(Vector3 _position) { TransInfo.Scale = _position; }
 
 	void SetScale(float _x, float _y) { TransInfo.Scale.x = _x; TransInfo.Scale.y = _y; }
+
+	int GetLife() { return Life; }
+	void SetLife(int _life) { Life = _life; }
+	int GetBomb() { return Bomb; }
+	void SetBomb(int _bomb) { Bomb = _bomb; }
+	int GetPower() { return Power; }
+	void SetPower(int _power) { Power = _power; }
+	int GetItem() { return Item; }
+	void SetItem(int _item) { Item = _item; }
+	int GetGraze() { return Graze; }
+	void SetGraze(int _graze) { Graze = _graze; }
+	void SetSpeed(float _speed) { Speed = _speed; }
 	
 	Vector3 GetPosition() { return TransInfo.Position; }
 

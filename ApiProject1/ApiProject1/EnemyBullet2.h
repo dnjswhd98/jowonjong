@@ -1,6 +1,7 @@
 #pragma once
-#include "BulletBridge.h"
-class EnemyBullet : public BulletBridge
+#include "EnemyBridge.h"
+
+class EnemyBullet2 : public EnemyBridge
 {
 protected:
 	float Speed;
@@ -11,7 +12,8 @@ public:
 	virtual int Update(Transform& _rTransInfo)override;
 	virtual void Render(HDC _hdc)override;
 	virtual void Release()override;
-	EnemyBullet();
-	~EnemyBullet();
+	EnemyBullet2();
+	~EnemyBullet2();
+
 };
 

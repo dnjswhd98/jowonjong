@@ -5,6 +5,7 @@ class ScoreManager;
 class StageFront : public Object
 {
 public:
+	Object* _ItemNum;
 	vector<ScoreManager*> ScoreList;
 public:
 	virtual void Initialize()override;

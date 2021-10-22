@@ -19,6 +19,11 @@ void Player::Initialize()
 	Frame = 0;
 
 	strKey = "Marisa";
+	Life = 2;
+	Bomb = 3;
+	Power = 0;
+	Item = 0;
+	Graze = 0;
 
 	BulletList = ObjectManager::GetInstance()->GetBulletList();
 	Time = GetTickCount64();

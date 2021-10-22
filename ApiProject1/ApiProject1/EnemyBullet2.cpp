@@ -1,13 +1,13 @@
-#include "EnemyBullet.h"
+#include "EnemyBullet2.h"
 #include "Object.h"
 
-void EnemyBullet::Initialize()
+void EnemyBullet2::Initialize()
 {
     Speed = 1.0f;
-    DrawKey = "EnemyBullet";
+    DrawKey = "EnemyBullet2";
 }
 
-int EnemyBullet::Update(Transform& _rTransInfo)
+int EnemyBullet2::Update(Transform& _rTransInfo)
 {
 	_rTransInfo.Position.x += _rTransInfo.Direction.x * Speed;
 	_rTransInfo.Position.y -= -_rTransInfo.Direction.y * Speed;
@@ -19,33 +19,33 @@ int EnemyBullet::Update(Transform& _rTransInfo)
 		)
 		return 1;
 
-	return 3;
+	return 4;
 }
 
-void EnemyBullet::Render(HDC _hdc)
+void EnemyBullet2::Render(HDC _hdc)
 {
 	ImageList = Object::GetImageList();
 	TransparentBlt(_hdc,
-		int(RealObject->GetPosition().x - 8),
-		int(RealObject->GetPosition().y - 8),
-		16,
-		16,
+		int(RealObject->GetPosition().x - 4),
+		int(RealObject->GetPosition().y - 4),
+		8,
+		8,
 		ImageList[DrawKey]->GetMemDC(),
-		int(16 * FrameX),
-		int(16 * FrameY),
-		16,
-		16,
+		int(8 * FrameX),
+		int(8 * FrameY),
+		8,
+		8,
 		RGB(0, 0, 0));
 }
 
-void EnemyBullet::Release()
+void EnemyBullet2::Release()
 {
 }
 
-EnemyBullet::EnemyBullet()
+EnemyBullet2::EnemyBullet2()
 {
 }
 
-EnemyBullet::~EnemyBullet()
+EnemyBullet2::~EnemyBullet2()
 {
 }

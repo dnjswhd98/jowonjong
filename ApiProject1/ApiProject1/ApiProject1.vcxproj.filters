@@ -115,6 +115,21 @@
     <Filter Include="소스 파일\Object\Bullet\BulletBridge\EnemyBullet">
       <UniqueIdentifier>{c51924dd-1984-477d-b0de-ba87d7c95fc6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Object\Bullet\BulletBridge\EnemyBullet2">
+      <UniqueIdentifier>{aa2426da-ff19-4643-8f0a-44dea0632184}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Object\UI\PlayerBome">
+      <UniqueIdentifier>{2558dfa5-040d-449b-8bab-4e8549880a92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Object\Item">
+      <UniqueIdentifier>{a6426735-ef9e-4d4d-b40e-ab3f8f795681}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Object\UI\ItemNum">
+      <UniqueIdentifier>{40ca57fa-4e55-4997-82bb-bcf960423905}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Object\Player\GrazeZone">
+      <UniqueIdentifier>{d36a1938-3b28-4a5b-9f4f-0b34a32f8a44}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainUpdate.h">
@@ -234,6 +249,21 @@
     <ClInclude Include="EnemyBullet.h">
       <Filter>소스 파일\Object\Bullet\BulletBridge\EnemyBullet</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyBullet2.h">
+      <Filter>소스 파일\Object\Bullet\BulletBridge\EnemyBullet2</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBome.h">
+      <Filter>소스 파일\Object\UI\PlayerBome</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>소스 파일\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemNum.h">
+      <Filter>소스 파일\Object\UI\ItemNum</Filter>
+    </ClInclude>
+    <ClInclude Include="GrazeZone.h">
+      <Filter>소스 파일\Object\Player\GrazeZone</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ApiProject1.cpp">
@@ -322,6 +352,21 @@
     </ClCompile>
     <ClCompile Include="EnemyBullet.cpp">
       <Filter>소스 파일\Object\Bullet\BulletBridge\EnemyBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBullet2.cpp">
+      <Filter>소스 파일\Object\Bullet\BulletBridge\EnemyBullet2</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerBome.cpp">
+      <Filter>소스 파일\Object\UI\PlayerBome</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>소스 파일\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemNum.cpp">
+      <Filter>소스 파일\Object\UI\ItemNum</Filter>
+    </ClCompile>
+    <ClCompile Include="GrazeZone.cpp">
+      <Filter>소스 파일\Object\Player\GrazeZone</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

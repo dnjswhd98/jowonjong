@@ -62,7 +62,7 @@ public:
 		return pObj;
 	}
 
-	static Object* CreateObject(Vector3 _vPos, float _Dx, float _Dy, Bridge* pBridge)
+	static Object* CreateObject(Vector3 _vPos, float _Dx, float _Dy, int _frameX, int _frameY, Bridge* pBridge)
 	{
 		Object* pObj = new T;
 
@@ -71,6 +71,7 @@ public:
 		pObj->SetDirection(_Dx, _Dy);
 
 		pBridge->SetObject(pObj);
+		pBridge->SetFrame(_frameX, _frameY);
 		pBridge->Initialize();
 
 		((T*)pObj)->SetBridge(pBridge);

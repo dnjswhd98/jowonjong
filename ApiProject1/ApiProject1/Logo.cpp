@@ -20,6 +20,7 @@ void Logo::Initialize()
 	ImageList["MarisaBullet"] = (new Bitmap)->LoadBmp(L"../Resource/MBullet.bmp");
 	ImageList["MarisaLazer"] = (new Bitmap)->LoadBmp(L"../Resource/Lazer.bmp");
 	ImageList["EnemyBullet"] = (new Bitmap)->LoadBmp(L"../Resource/EnemyBullet.bmp");
+	ImageList["EnemyBullet2"] = (new Bitmap)->LoadBmp(L"../Resource/EnemyBullet2.bmp");
 
 	ImageList["Enemy"] = (new Bitmap)->LoadBmp(L"../Resource/stg2boss.bmp");
 
@@ -32,6 +33,11 @@ void Logo::Initialize()
 	ImageList["PowerFont"] = (new Bitmap)->LoadBmp(L"../Resource/PowerFont.bmp");
 	ImageList["GrazeFont"] = (new Bitmap)->LoadBmp(L"../Resource/GrazeFont.bmp");
 	ImageList["ScoreItemFont"] = (new Bitmap)->LoadBmp(L"../Resource/ScoreItemFont.bmp");
+	ImageList["inGameLogo"] = (new Bitmap)->LoadBmp(L"../Resource/InGameLogo.bmp");
+	ImageList["LifeBome"] = (new Bitmap)->LoadBmp(L"../Resource/star1.bmp");
+	ImageList["Item1"] = (new Bitmap)->LoadBmp(L"../Resource/Item1.bmp");
+	ImageList["Item2"] = (new Bitmap)->LoadBmp(L"../Resource/Item2.bmp");
+	ImageList["ItemNum"] = (new Bitmap)->LoadBmp(L"../Resource/Score.bmp");
 
 	ScoreManager::GetInstance()->SetImage((new Bitmap)->LoadBmp(L"../Resource/Score.bmp"));
 #pragma endregion

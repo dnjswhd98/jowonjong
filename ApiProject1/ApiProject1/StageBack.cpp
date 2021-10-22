@@ -44,9 +44,9 @@ void StageBack::Render(HDC _hdc)
 		BitBlt(_hdc, 0, 0, WindowsWidth, WindowsHeight,
 			ImageList[strKey]->GetMemDC(), 0, nY, SRCCOPY);
 	
-	nY -= 4;
-	if (nY + WindowsHeight <= 0)
-		nY += MapSize;
+	nY += 1;
+	if (nY + WindowsHeight >= 1024)
+		nY -= MapSize;
 }
 
 void StageBack::Release()
