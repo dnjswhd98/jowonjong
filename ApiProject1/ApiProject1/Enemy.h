@@ -28,6 +28,9 @@ public:
 	template<typename T>
 	Object* CreateBullet();
 
+	template<typename T>
+	Object* CreateBullet(Vector3 _pos);
+
 	Enemy();
 	Enemy(const Transform& _rTransInfo) : Object(_rTransInfo) { }
 	~Enemy();

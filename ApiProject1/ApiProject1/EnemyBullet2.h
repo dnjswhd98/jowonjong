@@ -5,6 +5,7 @@ class EnemyBullet2 : public EnemyBridge
 {
 protected:
 	bool BAc;
+	int CCount;
 	float Speed;
 	ULONGLONG BTime;
 

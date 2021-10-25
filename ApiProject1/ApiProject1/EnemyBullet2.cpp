@@ -11,6 +11,7 @@ void EnemyBullet2::Initialize()
     DrawKey = "EnemyBullet2";
 	BAc = false;
 	BTime = GetTickCount64();
+	CCount = 1;
 	_pPlayer = ObjectManager::GetInstance()->GetPlayer();
 	EnemyList = ObjectManager::GetInstance()->GetEnemyList();
 }
@@ -38,8 +39,43 @@ int EnemyBullet2::Update(Transform& _rTransInfo)
 					BTime = GetTickCount64();
 				}
 			}
-			
+			else if ((*Eiter)->GetPower() == 1)
+			{
+				if (BTime + 500 <= GetTickCount64() && BAc == false)
+				{
+					Speed -= 0.5f;
+					BTime = GetTickCount64();
+
+				}
+				if (Speed < 0)
+					Speed = 0;
+				else if (Speed == 0)
+				{
+					if ((*Eiter)->GetTimeCount() < 24)
+					{
+						if (_rTransInfo.Position.x < (*Eiter)->GetPosition().x)
+						{
+							float cx = sinf((10 - (5 * ((*Eiter)->GetTimeCount() - 3))) * PI / -180);
+							float cy = cosf((10 - (5 * ((*Eiter)->GetTimeCount() - 3))) * PI / -180);
+							_rTransInfo.Direction.x = cx / 2;
+							_rTransInfo.Direction.y = cy / 2;
+						}
+						else if (_rTransInfo.Position.x > (*Eiter)->GetPosition().x)
+						{
+							float cx = sinf((10 - (5 * ((*Eiter)->GetTimeCount() - 3))) * PI / 180);
+							float cy = cosf((10 - (5 * ((*Eiter)->GetTimeCount() - 3))) * PI / 180);
+							_rTransInfo.Direction.x = cx / 2;
+							_rTransInfo.Direction.y = cy / 2;
+						}
+					}
+
+					Speed = 1.0f;
+					BAc = true;
+					++CCount;
+				}
+			}
 		}
+		
 		break;
 	}
 

@@ -21,7 +21,7 @@ void Enemy::Initialize()
 	Count = 0;
 	Life = 2;
 	Power = 2;
-	Bomb = 150;
+	Bomb = 100;
 	Time = GetTickCount64();
 	FTime = GetTickCount64();
 	BulletList = ObjectManager::GetInstance()->GetBulletList();
@@ -30,6 +30,7 @@ void Enemy::Initialize()
 
 int Enemy::Update()
 {
+	TCount = Count;
 	if (Life == 2)
 	{
 		if (Power == 2)
@@ -77,9 +78,9 @@ int Enemy::Update()
 				}
 				else
 				{
-					if (Count < 13)
+					if (Count < 12)
 					{
-						if (Count == 5 || Count == 10)
+						if (Count == 5 || Count == 10 || Count == 15)
 						{
 							for (int i = 1; i < 6; ++i)
 							{
@@ -93,27 +94,27 @@ int Enemy::Update()
 							}
 						}
 
-						for (int i = 0; i < 3; ++i)
+						for (int i = 1; i < 4; ++i)
 						{
-							float cx = sinf((88 - (5 * Count)) * PI / 180);
-							float cy = cosf((88 - (5 * Count)) * PI / 180);
+							float cx = sinf((100 - (5 * Count)) * PI / 180);
+							float cy = cosf((100 - (5 * Count)) * PI / 180);
 
 							FrameX = 6;
 							FrameY = 0;
 
-							TransInfo.Direction = Vector3(cx / (1 + i), cy / (1 + i));
+							TransInfo.Direction = Vector3(cx / (0.5 * i), cy / (0.5 * i));
 							BulletList->push_back(CreateBullet<EnemyBullet2>());
 
-							cx = sinf((88 - (5 * Count)) * PI / -180);
-							cy = cosf((88 - (5 * Count)) * PI / -180);
+							cx = sinf((100 - (5 * Count)) * PI / -180);
+							cy = cosf((100 - (5 * Count)) * PI / -180);
 
-							TransInfo.Direction = Vector3(cx / (1 + i), cy / (1 + i));
+							TransInfo.Direction = Vector3(cx / (0.5 * i), cy / (0.5 * i));
 							BulletList->push_back(CreateBullet<EnemyBullet2>());
 						}
 						FTime = GetTickCount64();
 						++Count;
 					}
-					else if (Count >= 5 && Count < 7)
+					else if (Count >= 12 && Count < 24)
 						++Count;
 					else
 					{
@@ -151,10 +152,7 @@ int Enemy::Update()
 
 						}
 					}
-					else if (Count >= 30 && Count < 35)
-					{
-						
-					}
+					else if (Count >= 30 && Count < 35);
 					else if (Count >= 35 && Count < 43)
 					{
 						for (int i = 1; i < 8; ++i)
@@ -169,7 +167,7 @@ int Enemy::Update()
 							BulletList->push_back(CreateBullet<EnemyBullet>());
 						}
 					}
-					else if (Count >= 43 && Count < 60);
+					else if (Count >= 43 && Count < 100);
 
 					else
 						Count = 0;
@@ -177,6 +175,26 @@ int Enemy::Update()
 					++Count;
 					FTime = GetTickCount64();
 				}
+			}
+		}
+		else if(Power == 1)
+		{
+			if (FTime + 500 < GetTickCount64())
+			{
+				Vector3 BulletPos;
+				BulletPos = Vector3(TransInfo.Position.x - (-5.0f + (rand() % 10)), TransInfo.Position.y - (-5.0f + (rand() % 10)));
+				for (int i = 1; i < 10; ++i)
+				{
+					float cx = sinf((((rand() % 180) * i) * PI / 180));
+					float cy = cosf((((rand() % 180) * i) * PI / 180));
+
+					FrameX = 6;
+					FrameY = 2;
+					TransInfo.Direction = Vector3(cx / 2, cy / 2);
+					BulletList->push_back(CreateBullet<EnemyBullet>(BulletPos));
+
+				}
+				FTime = GetTickCount64();
 			}
 		}
 	}
@@ -222,6 +240,16 @@ inline Object* Enemy::CreateBullet()
 	Bridge* pBridge = new T;
 
 	Object* pBullet = ObjectFactory<Bullet>::CreateObject(TransInfo.Position, TransInfo.Direction.x, TransInfo.Direction.y, FrameX, FrameY, pBridge);
+
+	return pBullet;
+}
+
+template<typename T>
+inline Object* Enemy::CreateBullet(Vector3 _pos)
+{
+	Bridge* pBridge = new T;
+
+	Object* pBullet = ObjectFactory<Bullet>::CreateObject(_pos, TransInfo.Direction.x, TransInfo.Direction.y, FrameX, FrameY, pBridge);
 
 	return pBullet;
 }

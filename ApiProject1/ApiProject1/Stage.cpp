@@ -103,19 +103,24 @@ void Stage::Update()
 	_GrazeN->SetPower(_pPlayer->GetGraze());
 	_GrazeZone->Update();
 
+
 	float MinusHpBar = MaxHpBar / EnemyHpMax;
 
 	_pPlayer->SetLife(playerLife);
+
+	if (_BTime + 1000 < GetTickCount64())
+	{
+		Tcount;
+		_BTime = GetTickCount64();
+	}
 
 	for (vector<Object*>::iterator iter = EnemyList->begin();
 		iter != EnemyList->end(); )
 	{
 		(*iter)->Update();
-		if ((*iter)->GetLife() == 1)
-		{
-			_ShockWave->SetPosition((*iter)->GetPosition());
+		if ((*iter)->GetPower() < 2 || (*iter)->GetLife() < 2)
 			_ShockWave->Update();
-		}
+		
 		break;
 	}
 
@@ -128,34 +133,26 @@ void Stage::Update()
 
 		break;
 	}
-	
+
 
 	for (vector<Object*>::iterator iter = BulletList->begin();
 		iter != BulletList->end(); )
 	{
 		int iResult = (*iter)->Update();
 
-		//if (Count >= 30 && Count < 35)
-		//{
-		//	for (vector<Object*>::iterator iter = BulletList->begin();
-		//		iter != BulletList->end(); )
-		//	{
-		//		if ((*iter)->Update() == 3 || (*iter)->Update() == 4)
-		//		{
-		//			if (!(*iter)->GetActive())
-		//			{
-		//				(*iter)->SetSpeed(0);
-		//				(*iter)->SetActive(true);
-		//			}
-		//			else
-		//			{
-		//				(*iter)->SetSpeed((*iter)->GetSpeed() + 0.5);
-		//			}
-		//		}
-		//		break;
-		//	}
-		//
-		//}
+		for (vector<Object*>::iterator iter2 = EnemyList->begin();
+			iter2 != EnemyList->end(); )
+		{
+			
+			break;
+		}
+		break;
+	}
+
+	for (vector<Object*>::iterator iter = BulletList->begin();
+		iter != BulletList->end(); )
+	{
+		int iResult = (*iter)->Update();
 
 		if (iResult == 4)
 		{
@@ -165,17 +162,52 @@ void Stage::Update()
 		for (vector<Object*>::iterator iter2 = EnemyList->begin();
 			iter2 != EnemyList->end(); )
 		{
-			if ((*iter2)->GetLife() == 1)
+			if ((*iter2)->GetPower() == 1 && (*iter2)->GetLife() == 2)
 			{
-				if ((*iter2)->GetPower() == 2)
+				if (_ShockWave->GetPower() == 1)
 				{
-					(*iter)->SetTime(_BTime);
-					if (_BTime + 3000 < GetTickCount64())
-					{
-						_BTime = GetTickCount64();
-					}
+					if ((*iter)->Update() == 3 || (*iter)->Update() == 4)
+						iResult = 1;
+					_ShockWave->SetPosition((*iter2)->GetPosition());
+					_ShockWave->SetPower(0);
 				}
 			}
+			if ((*iter2)->GetLife() == 1)
+			{
+				if (_ShockWave->GetBomb() == 1)
+				{
+					if ((*iter)->Update() == 3 || (*iter)->Update() == 4)
+						iResult = 1;
+					_ShockWave->SetLife(1);
+					_ShockWave->SetBomb(0);
+					_ShockWave->SetPosition((*iter2)->GetPosition());
+				}
+			}
+			if ((*iter2)->GetPower() == 1 && (*iter2)->GetLife() == 1)
+			{
+				if (_ShockWave->GetItem() == 1)
+				{
+					iResult = 1;
+
+					_ShockWave->SetLife(1);
+					_ShockWave->SetItem(0);
+					_ShockWave->SetPosition((*iter2)->GetPosition());
+				}
+			}
+			if ((*iter2)->GetTimeCount() == 30)
+			{
+
+				_ShockWave->SetPosition((*iter2)->GetPosition());
+				_ShockWave->SetLife(1);
+			}
+			if ((*iter2)->GetTimeCount() == 50)
+			{
+
+				_ShockWave->SetPosition((*iter2)->GetPosition());
+				_ShockWave->SetLife(1);
+			}
+
+			
 			
 			if ((*iter)->Update() == 3 || (*iter)->Update() == 4)
 			{
@@ -215,12 +247,11 @@ void Stage::Update()
 							_EnemyHpBar->SetScale(_EnemyHpBar->GetScale().x - MinusHpBar, _EnemyHpBar->GetScale().y);
 						}
 					}
-					else if (EnemyHp <= (EnemyHp / 4) && EnemyHp > 0)
+					else if (EnemyHp <= (EnemyHpMax / 4) && EnemyHp > 0)
 					{
 						++HitCount;
 						S += 10;
-						if ((*iter2)->GetPower() == 2)
-							(*iter2)->SetPower(1);
+						(*iter2)->SetPower(1);
 						if (HitCount == 5)
 						{
 							EnemyHp--;

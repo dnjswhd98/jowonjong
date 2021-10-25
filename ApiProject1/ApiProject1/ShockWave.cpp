@@ -8,6 +8,9 @@ void ShockWave::Initialize()
 	SPosition = EPosition / 2;
 	EPosition = 0;
 	Life = 1;
+	Bomb = 1;
+	Item = 1;
+	Power = 1;
 }
 
 int ShockWave::Update()

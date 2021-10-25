@@ -18,6 +18,7 @@ protected:
 	int Graze;
 	int _Framex;
 	int _Framey;
+	int TCount;
 	float Speed;
 
 	ULONGLONG ATime;
@@ -60,6 +61,7 @@ public:
 	void SetGraze(int _graze) { Graze = _graze; }
 	float GetSpeed() { return Speed; }
 	void SetSpeed(float _speed) { Speed = _speed; }
+	int GetTimeCount() { return TCount; }
 	void SetTime(ULONGLONG _time) { ATime = _time; }
 
 	void SetFrame(float _framex, float _framey) { _Framex = _framex, _Framey = _framey; }
