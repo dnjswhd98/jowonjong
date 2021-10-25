@@ -3,9 +3,12 @@
 class EnemyBullet : public BulletBridge
 {
 protected:
-	float Speed;
+	bool BAc;
+	ULONGLONG BTime;
 	map<string, Bitmap*> ImageList;
+	vector<Object*>* EnemyList;
 
+	Object* _pPlayer;
 public:
 	virtual void Initialize()override;
 	virtual int Update(Transform& _rTransInfo)override;

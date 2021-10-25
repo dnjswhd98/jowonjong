@@ -85,24 +85,26 @@ int Player::Update()
 			TransInfo.Position.x -= SlowSpeed;
 		}
 	}
-
-
 	
 	if (GetAsyncKeyState('Z') && FTime + 50 < GetTickCount64())
 	{
 		BulletList->push_back(CreateBullet<MarisaBullet>());
 		FTime = GetTickCount64();
 	}
+
+	if (Power > 128)
+		Power = 128;
+
 	return 0;
 }
 
 void Player::Render(HDC _hdc)
 {
 	TransparentBlt(_hdc,
-		int(TransInfo.Position.x - (TransInfo.Scale.x / 2) + Offset.x),
-		int(TransInfo.Position.y - (TransInfo.Scale.y / 2) + Offset.y),
-		int(TransInfo.Scale.x),
-		int(TransInfo.Scale.y),
+		int(TransInfo.Position.x - (TransInfo.Scale.x / 2) + 2.5f),
+		int(TransInfo.Position.y - (TransInfo.Scale.y / 2) + 2.5f),
+		int(TransInfo.Scale.x - 5),
+		int(TransInfo.Scale.y - 5),
 		ImageList[strKey]->GetMemDC(),
 		int(TransInfo.Scale.x * Frame),
 		int(TransInfo.Scale.y * 0),

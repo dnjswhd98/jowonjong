@@ -178,6 +178,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ScoreManager.h" />
+    <ClInclude Include="ShockWave.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="StageBack.h" />
     <ClInclude Include="StageFront.h" />
@@ -216,6 +217,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ScoreManager.cpp" />
+    <ClCompile Include="ShockWave.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="StageBack.cpp" />
     <ClCompile Include="StageFront.cpp" />

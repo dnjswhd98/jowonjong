@@ -9,6 +9,8 @@ private:
 	int EnemyHpMax;
 	int S;
 	int playerLife;
+	int HitCount;
+	int Tcount;
 	float MaxHpBar;
 	float count;
 	ULONGLONG _BTime;
@@ -24,6 +26,7 @@ private:
 	Object* _ScoreIN;
 	Object* _GrazeN;
 	Object* _GrazeZone;
+	Object* _ShockWave;
 
 	vector<Object*>* BulletList;
 	vector<Object*>* EnemyList;

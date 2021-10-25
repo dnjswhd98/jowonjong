@@ -16,6 +16,7 @@
 #include "Item.h"
 #include "ItemNum.h"
 #include "GrazeZone.h"
+#include "ShockWave.h"
 
 void Stage::Initialize()
 {
@@ -42,13 +43,14 @@ void Stage::Initialize()
 	_GrazeN->SetPosition(Vector3(490, 180));
 	_GrazeZone = new GrazeZone;
 	_GrazeZone->Initialize();
+	_ShockWave = new ShockWave;
+	_ShockWave->Initialize();
 
 	_pPlayer = ObjectManager::GetInstance()->GetPlayer();
 	BulletList = ObjectManager::GetInstance()->GetBulletList();
 	EnemyList = ObjectManager::GetInstance()->GetEnemyList();
 	ItemList = ObjectManager::GetInstance()->GetItemList();
 	
-	//Vector3 Center = Vector3(WindowsWidth / 3.0f, WindowsHeight / 2.0f);
 
 	for (int i = 0; i < 1; ++i)
 	{
@@ -72,7 +74,8 @@ void Stage::Initialize()
 	EnemyHp = 100;
 	EnemyHpMax = EnemyHp;
 	MaxHpBar = _EnemyHpBar->GetScale().x;
-	
+	HitCount = 0;
+	Tcount = 0;
 
 	S = 0;
 	playerLife = 3;
@@ -104,10 +107,15 @@ void Stage::Update()
 
 	_pPlayer->SetLife(playerLife);
 
-	for (vector<Object*>::iterator iter2 = EnemyList->begin();
-		iter2 != EnemyList->end(); )
+	for (vector<Object*>::iterator iter = EnemyList->begin();
+		iter != EnemyList->end(); )
 	{
-		(*iter2)->Update();
+		(*iter)->Update();
+		if ((*iter)->GetLife() == 1)
+		{
+			_ShockWave->SetPosition((*iter)->GetPosition());
+			_ShockWave->Update();
+		}
 		break;
 	}
 
@@ -115,6 +123,9 @@ void Stage::Update()
 		iter != BulletList->end(); )
 	{
 		(*iter)->Update();
+
+		
+
 		break;
 	}
 	
@@ -124,9 +135,47 @@ void Stage::Update()
 	{
 		int iResult = (*iter)->Update();
 
+		//if (Count >= 30 && Count < 35)
+		//{
+		//	for (vector<Object*>::iterator iter = BulletList->begin();
+		//		iter != BulletList->end(); )
+		//	{
+		//		if ((*iter)->Update() == 3 || (*iter)->Update() == 4)
+		//		{
+		//			if (!(*iter)->GetActive())
+		//			{
+		//				(*iter)->SetSpeed(0);
+		//				(*iter)->SetActive(true);
+		//			}
+		//			else
+		//			{
+		//				(*iter)->SetSpeed((*iter)->GetSpeed() + 0.5);
+		//			}
+		//		}
+		//		break;
+		//	}
+		//
+		//}
+
+		if (iResult == 4)
+		{
+			(*iter)->SetSpeed((*iter)->GetSpeed() - 0.5f);
+		}
+		
 		for (vector<Object*>::iterator iter2 = EnemyList->begin();
 			iter2 != EnemyList->end(); )
 		{
+			if ((*iter2)->GetLife() == 1)
+			{
+				if ((*iter2)->GetPower() == 2)
+				{
+					(*iter)->SetTime(_BTime);
+					if (_BTime + 3000 < GetTickCount64())
+					{
+						_BTime = GetTickCount64();
+					}
+				}
+			}
 			
 			if ((*iter)->Update() == 3 || (*iter)->Update() == 4)
 			{
@@ -137,59 +186,63 @@ void Stage::Update()
 						_pPlayer->SetGraze(_pPlayer->GetGraze() + 1);
 						(*iter)->SetLife(0);
 					}
-					break;
-				}
-			}
-
-			if (_BTime + 300 <= GetTickCount64())
-			{
-				if ((*iter)->Update() == 4)
-				{
-					Vector3 TargetPos(_pPlayer->GetPosition().x, _pPlayer->GetPosition().y + 500);
-					(*iter)->SetDirection(-((*iter)->GetPosition().x - (TargetPos.x)) /500 , -((*iter)->GetPosition().y - TargetPos.y) / 1000);
-					break;
-
 				}
 				
-				_BTime = GetTickCount64();
+				//if (CollisionManager::EllipseCollision(_ShockWave, (*iter)))
+				//{
+				//	iResult = 1;
+				//}
 			}
 			
-
 			if (CollisionManager::EllipseCollision((*iter), (*iter2)))
 			{
 				if ((*iter)->Update() != 3 && (*iter)->Update() != 4)
 				{
+					if (EnemyHp <= 0)
+					{
 						EnemyHp--;
-
-						if (EnemyHp <= 0)
+						S += 50010;
+						if ((*iter2)->GetLife() > 1)
 						{
-
-							iter2 = EnemyList->erase(iter2);
-							_EnemyHpBar->SetScale(_EnemyHpBar->GetScale().x - MinusHpBar, _EnemyHpBar->GetScale().y);
-							S += 50010;
-							ScoreManager::GetInstance()->SetScore(S);
+							(*iter2)->SetLife((*iter2)->GetLife() - 1);
+							(*iter2)->SetPower(2);
+							_EnemyHpBar->SetScale(280, 5);
+							EnemyHp = EnemyHpMax;
 						}
-						//else if (EnemyHp <= 200)
-						//{
-						//	_EnemyHpBar->SetScale(_EnemyHpBar->GetScale().x - MinusHpBar, _EnemyHpBar->GetScale().y);
-						//	S += 10;
-						//	ScoreManager::GetInstance()->SetScore(S);
-						//}
 						else
 						{
+							iter2 = EnemyList->erase(iter2);
 							_EnemyHpBar->SetScale(_EnemyHpBar->GetScale().x - MinusHpBar, _EnemyHpBar->GetScale().y);
-							S += 10;
-							ScoreManager::GetInstance()->SetScore(S);
 						}
+					}
+					else if (EnemyHp <= (EnemyHp / 4) && EnemyHp > 0)
+					{
+						++HitCount;
+						S += 10;
+						if ((*iter2)->GetPower() == 2)
+							(*iter2)->SetPower(1);
+						if (HitCount == 5)
+						{
+							EnemyHp--;
+							_EnemyHpBar->SetScale(_EnemyHpBar->GetScale().x - MinusHpBar, _EnemyHpBar->GetScale().y);
+							HitCount = 0;
+						}
+					}
+					else
+					{
+						EnemyHp--;
+						_EnemyHpBar->SetScale(_EnemyHpBar->GetScale().x - MinusHpBar, _EnemyHpBar->GetScale().y);
+						S += 10;
+					}
 
 
-						iResult = 1;
+					iResult = 1;
 
-						break;
 				}
 			}
 			else
 				++iter2;
+			break;
 		}
 		if (iResult == 1)
 			iter = BulletList->erase(iter);
@@ -214,7 +267,7 @@ void Stage::Update()
 			{
 			case 0:
 				_pPlayer->SetPower(_pPlayer->GetPower() + 1);
-				S += 100;
+				S += 10;
 				break;
 			case 1:
 				_pPlayer->SetItem(_pPlayer->GetItem() + 1);
@@ -222,40 +275,44 @@ void Stage::Update()
 				break;
 			case 2:
 				_pPlayer->SetPower(_pPlayer->GetPower() + 10);
-				S += 300;
+				S += 10;
 				break;
 			case 3:
 				_pPlayer->SetBomb(_pPlayer->GetBomb() + 1);
-				S += 400;
 				break;
 			case 4:
-				_pPlayer->SetPower(_pPlayer->GetPower() + 125);
-				S += 500;
+				if (_pPlayer->GetPower() < 128)
+					_pPlayer->SetPower(_pPlayer->GetPower() + 128);
+				if (_pPlayer->GetPower() >= 128)
+					S += 1000;
 				break;
 			case 5:
 				++playerLife;
-				S += 600;
 				break;
 			default:
 				break;
 			}
-			ScoreManager::GetInstance()->SetScore(S);
 			Iiter = ItemList->erase(Iiter);
 		}
 		break;
 	}
 
+	
+
+	ScoreManager::GetInstance()->SetScore(S);
 }
 
 void Stage::Render(HDC _hdc)
 {
 	_StageBack->Render(ImageList["Buffer"]->GetMemDC());
 
+	_ShockWave->Render(ImageList["Buffer"]->GetMemDC());
+
 	for (vector<Object*>::iterator iter = EnemyList->begin();
 		iter != EnemyList->end(); ++iter)
 		(*iter)->Render(ImageList["Buffer"]->GetMemDC());
 	
-	_GrazeZone->Render(ImageList["Buffer"]->GetMemDC());
+	//_GrazeZone->Render(ImageList["Buffer"]->GetMemDC());
 	_pPlayer->Render(ImageList["Buffer"]->GetMemDC());
 	_pPSide[0]->Render(ImageList["Buffer"]->GetMemDC());
 	_pPSide[1]->Render(ImageList["Buffer"]->GetMemDC());

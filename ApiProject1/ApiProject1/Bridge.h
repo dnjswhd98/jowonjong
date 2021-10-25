@@ -8,6 +8,8 @@ protected:
 	string DrawKey;
 	int FrameX;
 	int FrameY;
+	float Speed;
+	ULONGLONG ABTime;
 	Object* RealObject;
 public:
 	virtual void Initialize()PURE;
@@ -16,7 +18,9 @@ public:
 	virtual void Release()PURE;
 public:
 	void SetObject(Object* _pObject) { RealObject = _pObject; }
-	void SetFrame(float _x, float _y) { FrameX = _x, FrameY = _y; }
+	void SetFrame(int _x, int _y) { FrameX = _x, FrameY = _y; }
+	void SetSpeed(float _Speed) { Speed = _Speed; }
+	void SetTime(ULONGLONG _time) { ABTime = _time; }
 public:
 	Bridge();
 	virtual ~Bridge();

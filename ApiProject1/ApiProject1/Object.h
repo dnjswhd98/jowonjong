@@ -6,7 +6,6 @@ class Object
 {
 protected:
 	Transform TransInfo;
-
 	Transform Collider;
 	Vector3 Offset;
 
@@ -17,7 +16,11 @@ protected:
 	int Bomb;
 	int Item;
 	int Graze;
+	int _Framex;
+	int _Framey;
 	float Speed;
+
+	ULONGLONG ATime;
 
 	static map<string, Bitmap*>ImageList;
 
@@ -55,7 +58,11 @@ public:
 	void SetItem(int _item) { Item = _item; }
 	int GetGraze() { return Graze; }
 	void SetGraze(int _graze) { Graze = _graze; }
+	float GetSpeed() { return Speed; }
 	void SetSpeed(float _speed) { Speed = _speed; }
+	void SetTime(ULONGLONG _time) { ATime = _time; }
+
+	void SetFrame(float _framex, float _framey) { _Framex = _framex, _Framey = _framey; }
 	
 	Vector3 GetPosition() { return TransInfo.Position; }
 

@@ -12,7 +12,6 @@ private:
 	ULONGLONG FTime;
 
 	vector<Object*>* BulletList;
-	//Object* Side;
 public:
 	virtual void Initialize()override;
 	virtual int Update()override;

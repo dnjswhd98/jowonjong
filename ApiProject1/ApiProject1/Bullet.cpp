@@ -13,16 +13,24 @@ void Bullet::Initialize()
 
 	BridgeObject = NULL;
 
+	Speed = 1.0;
 	strKey = "Bullet";
 	Active = false;
 	Life = 1;
+	BAc = false;
+	BTime = GetTickCount64();
+	EnemyList = ObjectManager::GetInstance()->GetEnemyList();
+	
 }
 
 int Bullet::Update()
 {
 	int re;
 	if (BridgeObject)
+	{
 		re = BridgeObject->Update(TransInfo);
+		BridgeObject->SetTime(ATime);
+	}
 
 	return re;
 }

@@ -34,6 +34,11 @@ void Item::Initialize()
 		Frame = 3;
 		strKey = "Item2";
 		break;
+	case6:
+		TransInfo.Scale = Vector3(10, 10);
+		Frame = 0;
+		strKey = "BulletSItem";
+		break;
 	default:
 		break;
 	}

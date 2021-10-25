@@ -5,8 +5,11 @@ class Bridge;
 class Bullet : public Object
 {
 private:
+	bool BAc;
+	ULONGLONG BTime;
 	Bridge* BridgeObject;
 
+	vector<Object*>* EnemyList;
 public:
 	virtual void Initialize()override;
 	virtual int Update()override;

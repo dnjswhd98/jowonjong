@@ -38,6 +38,7 @@ void Logo::Initialize()
 	ImageList["Item1"] = (new Bitmap)->LoadBmp(L"../Resource/Item1.bmp");
 	ImageList["Item2"] = (new Bitmap)->LoadBmp(L"../Resource/Item2.bmp");
 	ImageList["ItemNum"] = (new Bitmap)->LoadBmp(L"../Resource/Score.bmp");
+	ImageList["ShockWave"] = (new Bitmap)->LoadBmp(L"../Resource/deadEF.bmp");
 
 	ScoreManager::GetInstance()->SetImage((new Bitmap)->LoadBmp(L"../Resource/Score.bmp"));
 #pragma endregion
