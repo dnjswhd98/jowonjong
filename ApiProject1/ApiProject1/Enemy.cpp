@@ -11,7 +11,7 @@
 
 void Enemy::Initialize()
 {
-	TransInfo.Position = Vector3(WindowsWidth / 3, 150);
+	TransInfo.Position = Vector3(MaxWidth / 2, 150);
 	TransInfo.Scale = Vector3(41.5f, 41.0f);
 
 	Active = false;
@@ -21,7 +21,8 @@ void Enemy::Initialize()
 	Count = 0;
 	Life = 2;
 	Power = 2;
-	Bomb = 100;
+	Bomb = 0;
+	Speed = 0.5;
 	Time = GetTickCount64();
 	FTime = GetTickCount64();
 	BulletList = ObjectManager::GetInstance()->GetBulletList();
@@ -30,6 +31,30 @@ void Enemy::Initialize()
 
 int Enemy::Update()
 {
+	
+	TransInfo.Position.x += direc.x * Speed;
+	TransInfo.Position.y += direc.y * Speed;
+
+	if (Active)
+	{
+		Speed = 1.0f;
+		Vector3 TargetPos(MaxWidth / 2, 150);
+		direc.x = (TargetPos.x - TransInfo.Position.x) / 50;
+		direc.y = (TargetPos.y - TransInfo.Position.y) / 50;
+		if (TransInfo.Position.x == MaxWidth / 2)
+		{
+			Speed = 0;
+			
+		}
+		if (Bomb == 0)
+		{
+			direc.x = 0;
+			direc.y = 0;
+			Active = false;
+		}
+	}
+	
+
 	TCount = Count;
 	if (Life == 2)
 	{
@@ -37,8 +62,31 @@ int Enemy::Update()
 		{
 			if (FTime + 500 < GetTickCount64())
 			{
+				if (Count == 0)
+				{
+					Speed = 0.5f;
+					if (TransInfo.Position.x < (MaxWidth - MinWidth) / 2)
+					{
+						direc.x = 1 + rand() % 8;
+						if(TransInfo.Position.y < MinHeight + 5)
+							direc.y = 2.0;
+						else if (TransInfo.Position.y < (MinHeight / 2) + 5)
+							direc.y = -2.0;
+						else
+							direc.y = -2.0 + rand() % 5;
+					}
+					else
+					{
+						direc.x = -(1 + rand() % 8);
+						if (TransInfo.Position.y < MinHeight + 5)
+							direc.y = 2.0;
+						else
+							direc.y = -2.0 + rand() % 5;
+					}
+				}
 				if (Count < 3)
 				{
+					Speed -= 0.15f;
 					for (int i = 0; i < 25; ++i)
 					{
 						float cx = sinf(((14.4 * i) * PI / 180));
@@ -59,9 +107,13 @@ int Enemy::Update()
 						}
 					}
 				}
-				else if (Count == 4)
+				else if (Count >= 3 && Count < 5)
+				{
+					Speed = 0.0f;
+					
+				}
+				else
 					Count = -1;
-				else;
 
 				++Count;
 				FTime = GetTickCount64();
@@ -138,8 +190,11 @@ int Enemy::Update()
 			{
 				if (FTime + 150 < GetTickCount64())
 				{
+					
 					if (Count < 30)
 					{
+						
+						Speed = 0.0f;
 						for (int i = 1; i < 9; ++i)
 						{
 							float cx = sinf((((rand() % 180) * i) * PI / 180));
@@ -152,7 +207,30 @@ int Enemy::Update()
 
 						}
 					}
-					else if (Count >= 30 && Count < 35);
+
+					else if (Count >= 30 && Count < 34);
+					else if(Count >= 34 && Count<35)
+					{
+						if (TransInfo.Position.x < (MaxWidth - MinWidth) / 2)
+						{
+							direc.x = 1 + rand() % 8;
+							if (TransInfo.Position.y < MinHeight + 5)
+								direc.y = 2.0;
+							else if (TransInfo.Position.y < (MinHeight / 2) + 5)
+								direc.y = -2.0;
+							else
+								direc.y = -2.0 + rand() % 5;
+						}
+						else
+						{
+							direc.x = -(1 + rand() % 8);
+							if (TransInfo.Position.y < MinHeight + 5)
+								direc.y = 2.0;
+							else
+								direc.y = -2.0 + rand() % 5;
+						}
+						Speed = 1.0f;
+					}
 					else if (Count >= 35 && Count < 43)
 					{
 						for (int i = 1; i < 8; ++i)

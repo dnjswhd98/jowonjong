@@ -66,7 +66,7 @@ void Stage::Initialize()
 		IObj->SetLife(i);
 		IObj->Initialize();
 		IObj->SetPosition(Epos);
-		IObj->SetSpeed(3.0f);
+		IObj->SetSpeed(2.0f);
 		ItemList->push_back(IObj);
 	}
 	
@@ -108,11 +108,7 @@ void Stage::Update()
 
 	_pPlayer->SetLife(playerLife);
 
-	if (_BTime + 1000 < GetTickCount64())
-	{
-		Tcount;
-		_BTime = GetTickCount64();
-	}
+	
 
 	for (vector<Object*>::iterator iter = EnemyList->begin();
 		iter != EnemyList->end(); )
@@ -128,26 +124,9 @@ void Stage::Update()
 		iter != BulletList->end(); )
 	{
 		(*iter)->Update();
-
-		
-
 		break;
 	}
 
-
-	for (vector<Object*>::iterator iter = BulletList->begin();
-		iter != BulletList->end(); )
-	{
-		int iResult = (*iter)->Update();
-
-		for (vector<Object*>::iterator iter2 = EnemyList->begin();
-			iter2 != EnemyList->end(); )
-		{
-			
-			break;
-		}
-		break;
-	}
 
 	for (vector<Object*>::iterator iter = BulletList->begin();
 		iter != BulletList->end(); )
@@ -166,32 +145,72 @@ void Stage::Update()
 			{
 				if (_ShockWave->GetPower() == 1)
 				{
-					if ((*iter)->Update() == 3 || (*iter)->Update() == 4)
-						iResult = 1;
-					_ShockWave->SetPosition((*iter2)->GetPosition());
+					(*iter2)->SetActive(true);
 					_ShockWave->SetPower(0);
+					_ShockWave->SetPosition((*iter2)->GetPosition());
+					Tcount = 0;
+				}
+				else
+				{
+					if (_BTime + 1000 < GetTickCount64())
+					{
+						++Tcount;
+						_BTime = GetTickCount64();
+					}
+					if (Tcount < 3)
+					{
+						if ((*iter)->Update() == 3 || (*iter)->Update() == 4)
+							iResult = 1;
+					}
+
 				}
 			}
 			if ((*iter2)->GetLife() == 1)
 			{
 				if (_ShockWave->GetBomb() == 1)
 				{
-					if ((*iter)->Update() == 3 || (*iter)->Update() == 4)
-						iResult = 1;
 					_ShockWave->SetLife(1);
-					_ShockWave->SetBomb(0);
 					_ShockWave->SetPosition((*iter2)->GetPosition());
+					Tcount = 0;
+					(*iter2)->SetBomb(100);
+					_ShockWave->SetBomb(0);
+				}
+				else
+				{
+					if (_BTime + 1000 < GetTickCount64())
+					{
+						++Tcount;
+						_BTime = GetTickCount64();
+					}
+					if (Tcount < 3)
+					{
+						if ((*iter)->Update() == 3 || (*iter)->Update() == 4)
+							iResult = 1;
+					}
 				}
 			}
 			if ((*iter2)->GetPower() == 1 && (*iter2)->GetLife() == 1)
 			{
 				if (_ShockWave->GetItem() == 1)
 				{
-					iResult = 1;
-
 					_ShockWave->SetLife(1);
-					_ShockWave->SetItem(0);
 					_ShockWave->SetPosition((*iter2)->GetPosition());
+					Tcount = 0;
+					(*iter2)->SetBomb(100);
+					_ShockWave->SetItem(0);
+				}
+				else
+				{
+					if (_BTime + 1000 < GetTickCount64())
+					{
+						++Tcount;
+						_BTime = GetTickCount64();
+					}
+					if (Tcount < 3)
+					{
+						if ((*iter)->Update() == 3 || (*iter)->Update() == 4)
+							iResult = 1;
+					}
 				}
 			}
 			if ((*iter2)->GetTimeCount() == 30)
@@ -228,47 +247,50 @@ void Stage::Update()
 			
 			if (CollisionManager::EllipseCollision((*iter), (*iter2)))
 			{
-				if ((*iter)->Update() != 3 && (*iter)->Update() != 4)
+				if ((*iter2)->GetBomb() <= 0)
 				{
-					if (EnemyHp <= 0)
+					if ((*iter)->Update() != 3 && (*iter)->Update() != 4)
 					{
-						EnemyHp--;
-						S += 50010;
-						if ((*iter2)->GetLife() > 1)
+						if (EnemyHp <= 0)
 						{
-							(*iter2)->SetLife((*iter2)->GetLife() - 1);
-							(*iter2)->SetPower(2);
-							_EnemyHpBar->SetScale(280, 5);
-							EnemyHp = EnemyHpMax;
+							EnemyHp--;
+							S += 50010;
+							if ((*iter2)->GetLife() > 1)
+							{
+								(*iter2)->SetLife((*iter2)->GetLife() - 1);
+								(*iter2)->SetPower(2);
+								_EnemyHpBar->SetScale(280, 5);
+								EnemyHp = EnemyHpMax;
+							}
+							else
+							{
+								iter2 = EnemyList->erase(iter2);
+								_EnemyHpBar->SetScale(_EnemyHpBar->GetScale().x - MinusHpBar, _EnemyHpBar->GetScale().y);
+							}
+						}
+						else if (EnemyHp <= (EnemyHpMax / 4) && EnemyHp > 0)
+						{
+							++HitCount;
+							S += 10;
+							(*iter2)->SetPower(1);
+							if (HitCount == 5)
+							{
+								EnemyHp--;
+								_EnemyHpBar->SetScale(_EnemyHpBar->GetScale().x - MinusHpBar, _EnemyHpBar->GetScale().y);
+								HitCount = 0;
+							}
 						}
 						else
 						{
-							iter2 = EnemyList->erase(iter2);
-							_EnemyHpBar->SetScale(_EnemyHpBar->GetScale().x - MinusHpBar, _EnemyHpBar->GetScale().y);
-						}
-					}
-					else if (EnemyHp <= (EnemyHpMax / 4) && EnemyHp > 0)
-					{
-						++HitCount;
-						S += 10;
-						(*iter2)->SetPower(1);
-						if (HitCount == 5)
-						{
 							EnemyHp--;
 							_EnemyHpBar->SetScale(_EnemyHpBar->GetScale().x - MinusHpBar, _EnemyHpBar->GetScale().y);
-							HitCount = 0;
+							S += 10;
 						}
+
+
+						iResult = 1;
+
 					}
-					else
-					{
-						EnemyHp--;
-						_EnemyHpBar->SetScale(_EnemyHpBar->GetScale().x - MinusHpBar, _EnemyHpBar->GetScale().y);
-						S += 10;
-					}
-
-
-					iResult = 1;
-
 				}
 			}
 			else
@@ -282,15 +304,11 @@ void Stage::Update()
 	}
 
 	for (vector<Object*>::iterator Iiter = ItemList->begin();
-		Iiter != ItemList->end(); )
+		Iiter != ItemList->end();)
 	{
-		(*Iiter)->Update();
+		int Re = (*Iiter)->Update();
 
-		if ((*Iiter)->Update() == 1)
-		{
-			Iiter = ItemList->erase(Iiter);
-			break;
-		}
+	
 
 		if (CollisionManager::EllipseCollision((*Iiter), _pPlayer))
 		{
@@ -302,7 +320,7 @@ void Stage::Update()
 				break;
 			case 1:
 				_pPlayer->SetItem(_pPlayer->GetItem() + 1);
-				S += 200;
+				S += (10 * (2 * (MaxHeight - _pPlayer->GetPosition().y)));
 				break;
 			case 2:
 				_pPlayer->SetPower(_pPlayer->GetPower() + 10);
@@ -323,9 +341,16 @@ void Stage::Update()
 			default:
 				break;
 			}
-			Iiter = ItemList->erase(Iiter);
+			Re = 1;
 		}
-		break;
+		if (Re == 1)
+		{
+			Iiter = ItemList->erase(Iiter);
+			break;
+		}
+		else
+			++Iiter;
+		
 	}
 
 	

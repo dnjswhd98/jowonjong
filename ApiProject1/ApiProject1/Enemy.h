@@ -16,6 +16,7 @@ private:
 	Object* _pPlayer;
 
 	vector<Object*>* BulletList;
+	Vector3 direc;
 public:
 	virtual void Initialize()override;
 	virtual int Update()override;

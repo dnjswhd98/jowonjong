@@ -47,19 +47,19 @@ int Player::Update()
 	{
 		Slow = false;
 
-		if (GetAsyncKeyState(VK_UP))
+		if (GetAsyncKeyState(VK_UP) && TransInfo.Position.y > MinHeight)
 		{
 			TransInfo.Position.y -= Speed;
 		}
-		if (GetAsyncKeyState(VK_DOWN))
+		if (GetAsyncKeyState(VK_DOWN) && TransInfo.Position.y < MaxHeight)
 		{
 			TransInfo.Position.y += Speed;
 		}
-		if (GetAsyncKeyState(VK_RIGHT))
+		if (GetAsyncKeyState(VK_RIGHT) && TransInfo.Position.x < MaxWidth)
 		{
 			TransInfo.Position.x += Speed;
 		}
-		if (GetAsyncKeyState(VK_LEFT))
+		if (GetAsyncKeyState(VK_LEFT) && TransInfo.Position.x > MinWidth)
 		{
 			TransInfo.Position.x -= Speed;
 		}
@@ -68,19 +68,19 @@ int Player::Update()
 	{
 		Slow = true;
 
-		if (GetAsyncKeyState(VK_UP))
+		if (GetAsyncKeyState(VK_UP) && TransInfo.Position.y > MinHeight)
 		{
 			TransInfo.Position.y -= SlowSpeed;
 		}
-		if (GetAsyncKeyState(VK_DOWN))
+		if (GetAsyncKeyState(VK_DOWN) && TransInfo.Position.y > MaxHeight)
 		{
 			TransInfo.Position.y += SlowSpeed;
 		}
-		if (GetAsyncKeyState(VK_RIGHT))
+		if (GetAsyncKeyState(VK_RIGHT) && TransInfo.Position.x < MaxWidth)
 		{
 			TransInfo.Position.x += SlowSpeed;
 		}
-		if (GetAsyncKeyState(VK_LEFT))
+		if (GetAsyncKeyState(VK_LEFT) && TransInfo.Position.x > MinWidth)
 		{
 			TransInfo.Position.x -= SlowSpeed;
 		}
