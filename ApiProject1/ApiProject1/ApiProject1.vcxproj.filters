@@ -136,6 +136,9 @@
     <Filter Include="소스 파일\Object\EF\ShockWave">
       <UniqueIdentifier>{89a2cafa-7005-4549-b99b-437cf0683760}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Object\Bullet\BulletBridge\Bomb">
+      <UniqueIdentifier>{6beb505a-36a1-40df-93bf-3498cf6fbb13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainUpdate.h">
@@ -273,6 +276,12 @@
     <ClInclude Include="ShockWave.h">
       <Filter>소스 파일\Object\EF\ShockWave</Filter>
     </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>소스 파일\Object\Bullet\BulletBridge\Bomb</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCore.h">
+      <Filter>소스 파일\Object\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ApiProject1.cpp">
@@ -379,6 +388,12 @@
     </ClCompile>
     <ClCompile Include="ShockWave.cpp">
       <Filter>소스 파일\Object\EF\ShockWave</Filter>
+    </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>소스 파일\Object\Bullet\BulletBridge\Bomb</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCore.cpp">
+      <Filter>소스 파일\Object\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

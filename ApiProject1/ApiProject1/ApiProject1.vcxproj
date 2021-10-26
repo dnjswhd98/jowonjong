@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="ApiProject1.h" />
     <ClInclude Include="Bitmap.h" />
+    <ClInclude Include="Bomb.h" />
     <ClInclude Include="Bridge.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletBridge.h" />
@@ -170,6 +171,7 @@
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerBome.h" />
+    <ClInclude Include="PlayerCore.h" />
     <ClInclude Include="PlayerSide.h" />
     <ClInclude Include="PlayerSide2.h" />
     <ClInclude Include="Prototype.h" />
@@ -188,6 +190,7 @@
   <ItemGroup>
     <ClCompile Include="ApiProject1.cpp" />
     <ClCompile Include="Bitmap.cpp" />
+    <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="Bridge.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletBridge.cpp" />
@@ -210,6 +213,7 @@
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerBome.cpp" />
+    <ClCompile Include="PlayerCore.cpp" />
     <ClCompile Include="PlayerSide.cpp" />
     <ClCompile Include="PlayerSide2.cpp" />
     <ClCompile Include="Prototype.cpp" />

@@ -9,7 +9,7 @@
 
 void PlayerSide2::Initialize()
 {
-	Fire = false;
+	Fire = true;
 	Frame = 0;
 	_pPlayer = ObjectManager::GetInstance()->GetPlayer();
 	TransInfo.Position = Vector3(_pPlayer->GetPosition().x + 30, _pPlayer->GetPosition().y);
@@ -23,20 +23,111 @@ void PlayerSide2::Initialize()
 	minusY = 20.0f;
 
 	time = GetTickCount64();
-
+	Ftime = GetTickCount64();
 }
 
 int PlayerSide2::Update()
 {
 	DWORD dwKey = InputManager::GetInstance()->GetKey();
-
-	if (GetAsyncKeyState('Z') && !Fire)
+	if (_pPlayer->GetPower() >= 8)
 	{
-		BulletList->push_back(CreateBullet<MarisaLazer>());
-		Fire = true;
+		if (GetAsyncKeyState('Z'))
+		{
+			if (_pPlayer->GetPower() >= 8 && _pPlayer->GetPower() < 16)
+			{
+				if (Ftime + 500 < GetTickCount64())
+				{
+					float cx = sinf(180 * PI / 180);
+					float cy = cosf(180 * PI / 180);
+					TransInfo.Direction = Vector3(cx, cy);
+
+					BulletList->push_back(CreateBullet<MarisaLazer>());
+					Ftime = GetTickCount64();
+				}
+			}
+			else if (_pPlayer->GetPower() >= 16 && _pPlayer->GetPower() < 32)
+			{
+				if (Ftime + 300 < GetTickCount64())
+				{
+					float cx = sinf(180 * PI / 180);
+					float cy = cosf(180 * PI / 180);
+					TransInfo.Direction = Vector3(cx, cy);
+
+					BulletList->push_back(CreateBullet<MarisaLazer>());
+					Ftime = GetTickCount64();
+				}
+			}
+			else if (_pPlayer->GetPower() >= 32 && _pPlayer->GetPower() < 64)
+			{
+				if (Ftime + 200 < GetTickCount64())
+				{
+					if (!Fire)
+					{
+						float cx = sinf(177 * PI / 180);
+						float cy = cosf(177 * PI / 180);
+						TransInfo.Direction = Vector3(cx, cy);
+						Fire = true;
+					}
+					else
+					{
+						float cx = sinf(177 * PI / -180);
+						float cy = cosf(177 * PI / -180);
+						TransInfo.Direction = Vector3(cx, cy);
+						Fire = false;
+					}
+
+					BulletList->push_back(CreateBullet<MarisaLazer>());
+					Ftime = GetTickCount64();
+				}
+			}
+			else if (_pPlayer->GetPower() >= 64 && _pPlayer->GetPower() < 128)
+			{
+				if (Ftime + 150 < GetTickCount64())
+				{
+					if (!Fire)
+					{
+						float cx = sinf(177 * PI / 180);
+						float cy = cosf(177 * PI / 180);
+						TransInfo.Direction = Vector3(cx, cy);
+						Fire = true;
+					}
+					else
+					{
+						float cx = sinf(177 * PI / -180);
+						float cy = cosf(177 * PI / -180);
+						TransInfo.Direction = Vector3(cx, cy);
+						Fire = false;
+					}
+
+					BulletList->push_back(CreateBullet<MarisaLazer>());
+					Ftime = GetTickCount64();
+				}
+			}
+			else
+			{
+				if (Ftime + 100 < GetTickCount64())
+				{
+					if (!Fire)
+					{
+						float cx = sinf(177 * PI / 180);
+						float cy = cosf(177 * PI / 180);
+						TransInfo.Direction = Vector3(cx, cy);
+						Fire = true;
+					}
+					else
+					{
+						float cx = sinf(177 * PI / -180);
+						float cy = cosf(177 * PI / -180);
+						TransInfo.Direction = Vector3(cx, cy);
+						Fire = false;
+					}
+
+					BulletList->push_back(CreateBullet<MarisaLazer>());
+					Ftime = GetTickCount64();
+				}
+			}
+		}
 	}
-	else
-		Fire = false;
 
 	if (GetAsyncKeyState(VK_SHIFT))
 	{
@@ -68,17 +159,20 @@ int PlayerSide2::Update()
 
 void PlayerSide2::Render(HDC _hdc)
 {
-	TransparentBlt(_hdc,
-		int(TransInfo.Position.x - (TransInfo.Scale.x / 2) + Offset.x),
-		int(TransInfo.Position.y - (TransInfo.Scale.y / 2) + Offset.y),
-		int(TransInfo.Scale.x),
-		int(TransInfo.Scale.y),
-		ImageList[strKey]->GetMemDC(),
-		int(TransInfo.Scale.x * Frame),
-		int(TransInfo.Scale.y * 0),
-		int(TransInfo.Scale.x),
-		int(TransInfo.Scale.y),
-		RGB(255, 0, 255));
+	if (_pPlayer->GetPower() >= 8)
+	{
+		TransparentBlt(_hdc,
+			int(TransInfo.Position.x - (TransInfo.Scale.x / 2) + Offset.x),
+			int(TransInfo.Position.y - (TransInfo.Scale.y / 2) + Offset.y),
+			int(TransInfo.Scale.x),
+			int(TransInfo.Scale.y),
+			ImageList[strKey]->GetMemDC(),
+			int(TransInfo.Scale.x * Frame),
+			int(TransInfo.Scale.y * 0),
+			int(TransInfo.Scale.x),
+			int(TransInfo.Scale.y),
+			RGB(255, 0, 255));
+	}
 }
 
 void PlayerSide2::Release()
@@ -98,7 +192,7 @@ inline Object* PlayerSide2::CreateBullet()
 {
 	Bridge* pBridge = new T;
 
-	Object* pBullet = ObjectFactory<Bullet>::CreateObject(TransInfo.Position, pBridge);
+	Object* pBullet = ObjectFactory<Bullet>::CreateObject(TransInfo.Position, TransInfo.Direction.x, TransInfo.Direction.y, 0, 0, pBridge);
 
 	return pBullet;
 }

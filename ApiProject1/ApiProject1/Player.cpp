@@ -6,6 +6,7 @@
 #include "Bullet.h"
 #include "MarisaBullet.h"
 #include "MarisaLazer.h"
+#include "Bomb.h"
 #include "PlayerSide.h"
 
 void Player::Initialize()
@@ -14,20 +15,24 @@ void Player::Initialize()
 	TransInfo.Scale = Vector3(29.0f, 44.0f);
 
 	Slow = false;
+	bBomb = false;
+	Active = false;
 	Speed = 3.0f;
 	SlowSpeed = 2.0f;
 	Frame = 0;
+	BFrame = 0;
 
 	strKey = "Marisa";
 	Life = 2;
 	Bomb = 3;
-	Power = 0;
+	Power = 128;
 	Item = 0;
 	Graze = 0;
 
 	BulletList = ObjectManager::GetInstance()->GetBulletList();
 	Time = GetTickCount64();
 	FTime = GetTickCount64();
+	BTime = GetTickCount64();
 }
 
 int Player::Update()
@@ -72,7 +77,7 @@ int Player::Update()
 		{
 			TransInfo.Position.y -= SlowSpeed;
 		}
-		if (GetAsyncKeyState(VK_DOWN) && TransInfo.Position.y > MaxHeight)
+		if (GetAsyncKeyState(VK_DOWN) && TransInfo.Position.y < MaxHeight)
 		{
 			TransInfo.Position.y += SlowSpeed;
 		}
@@ -88,12 +93,68 @@ int Player::Update()
 	
 	if (GetAsyncKeyState('Z') && FTime + 50 < GetTickCount64())
 	{
-		BulletList->push_back(CreateBullet<MarisaBullet>());
+		if (Power < 32)
+		{
+			BFrame = 0;
+			TransInfo.Direction = Vector3(0, -2);
+			BulletList->push_back(CreateBullet<MarisaBullet>());
+		}
+		else if (Power >= 32 && Power < 64)
+		{
+			for (int i = 0; i < 2; ++i)
+			{
+				float cx = sinf((178 + (4 * i)) * PI / 180);
+				float cy = cosf((178 + (4 * i)) * PI / 180);
+				TransInfo.Direction = Vector3(cx, cy);
+				BFrame = 0;
+				BulletList->push_back(CreateBullet<MarisaBullet>());
+			}
+		}
+		else
+		{
+			for (int i = 0; i < 3; ++i)
+			{
+				float cx = sinf((176 + (4 * i)) * PI / 180);
+				float cy = cosf((176 + (4 * i)) * PI / 180);
+				TransInfo.Direction = Vector3(cx, cy);
+				BFrame = 0;
+				BulletList->push_back(CreateBullet<MarisaBullet>());
+			}
+		}
 		FTime = GetTickCount64();
 	}
-
+	if (!bBomb)
+	{
+		if (GetAsyncKeyState('X') && Bomb > 0)
+		{
+			--Bomb;
+			bBomb = true;
+			Active = true;
+			for (int i = 0; i < 8; ++i)
+			{
+				float cx = sinf((45 * i) * PI / 180);
+				float cy = cosf((45 * i) * PI / 180);
+				TransInfo.Direction = Vector3(cx, cy);
+				if (i < 4)
+					BFrame = i;
+				else
+					BFrame = i - 4;
+				BulletList->push_back(CreateBullet<PBomb>());
+			}
+		}
+	}
+	if (BTime + 3000 < GetTickCount64() && bBomb)
+	{
+		if (bBomb)
+		{
+			bBomb = false;
+			Active = false;
+		}
+		BTime = GetTickCount64();
+	}
 	if (Power > 128)
 		Power = 128;
+
 
 	return 0;
 }
@@ -130,7 +191,7 @@ inline Object* Player::CreateBullet()
 {
 	Bridge* pBridge = new T;
 
-	Object* pBullet = ObjectFactory<Bullet>::CreateObject(TransInfo.Position, pBridge);
+	Object* pBullet = ObjectFactory<Bullet>::CreateObject(TransInfo.Position, TransInfo.Direction.x, TransInfo.Direction.y, BFrame, 0, pBridge);
 
 	return pBullet;
 }

@@ -41,6 +41,8 @@ void Stage::Initialize()
 	_GrazeN = new ItemNum;
 	_GrazeN->Initialize();
 	_GrazeN->SetPosition(Vector3(490, 180));
+	//_BossLife = ItemNum;
+	//_BossLife
 	_GrazeZone = new GrazeZone;
 	_GrazeZone->Initialize();
 	_ShockWave = new ShockWave;
@@ -60,18 +62,10 @@ void Stage::Initialize()
 
 		EnemyList->push_back(pObj);
 	}
-	for (int i = 0; i < 6; ++i)
-	{
-		Object* IObj = new Item;
-		IObj->SetLife(i);
-		IObj->Initialize();
-		IObj->SetPosition(Epos);
-		IObj->SetSpeed(2.0f);
-		ItemList->push_back(IObj);
-	}
+	
 	
 
-	EnemyHp = 100;
+	EnemyHp = 1000;
 	EnemyHpMax = EnemyHp;
 	MaxHpBar = _EnemyHpBar->GetScale().x;
 	HitCount = 0;
@@ -120,18 +114,31 @@ void Stage::Update()
 		break;
 	}
 
-	for (vector<Object*>::iterator iter = BulletList->begin();
-		iter != BulletList->end(); )
-	{
-		(*iter)->Update();
-		break;
-	}
 
 
 	for (vector<Object*>::iterator iter = BulletList->begin();
 		iter != BulletList->end(); )
 	{
 		int iResult = (*iter)->Update();
+
+		//for (vector<Object*>::iterator Titer = BulletList->begin();
+		//	Titer != BulletList->end(); )
+		//{
+		//	if (CollisionManager::EllipseCollision((*Titer), (*iter)))
+		//	{
+		//		if ((*Titer)->Update() == 5)
+		//		{
+		//			if (iResult == 3 || iResult == 4)
+		//			{
+		//				iResult = 1;
+		//			}
+		//			//break;
+		//		}
+		//	}
+		//	
+		//	++Titer;
+		//	//break;
+		//}
 
 		if (iResult == 4)
 		{
@@ -146,6 +153,7 @@ void Stage::Update()
 				if (_ShockWave->GetPower() == 1)
 				{
 					(*iter2)->SetActive(true);
+					(*iter2)->SetBomb(100);
 					_ShockWave->SetPower(0);
 					_ShockWave->SetPosition((*iter2)->GetPosition());
 					Tcount = 0;
@@ -160,7 +168,16 @@ void Stage::Update()
 					if (Tcount < 3)
 					{
 						if ((*iter)->Update() == 3 || (*iter)->Update() == 4)
+						{
+							Object* IObj = new Item;
+							IObj->SetLife(6);
+							IObj->Initialize();
+							IObj->SetPosition((*iter)->GetPosition());
+							IObj->SetSpeed(2.0f);
+							ItemList->push_back(IObj);
+						
 							iResult = 1;
+						}
 					}
 
 				}
@@ -185,7 +202,16 @@ void Stage::Update()
 					if (Tcount < 3)
 					{
 						if ((*iter)->Update() == 3 || (*iter)->Update() == 4)
+						{
+							Object* IObj = new Item;
+							IObj->SetLife(6);
+							IObj->Initialize();
+							IObj->SetPosition((*iter)->GetPosition());
+							IObj->SetSpeed(2.0f);
+							ItemList->push_back(IObj);
+
 							iResult = 1;
+						}
 					}
 				}
 			}
@@ -193,6 +219,7 @@ void Stage::Update()
 			{
 				if (_ShockWave->GetItem() == 1)
 				{
+					(*iter2)->SetActive(true);
 					_ShockWave->SetLife(1);
 					_ShockWave->SetPosition((*iter2)->GetPosition());
 					Tcount = 0;
@@ -209,25 +236,45 @@ void Stage::Update()
 					if (Tcount < 3)
 					{
 						if ((*iter)->Update() == 3 || (*iter)->Update() == 4)
+						{
+							Object* IObj = new Item;
+							IObj->SetLife(6);
+							IObj->Initialize();
+							IObj->SetPosition((*iter)->GetPosition());
+							IObj->SetSpeed(2.0f);
+							ItemList->push_back(IObj);
+
 							iResult = 1;
+						}
 					}
 				}
 			}
 			if ((*iter2)->GetTimeCount() == 30)
 			{
-
 				_ShockWave->SetPosition((*iter2)->GetPosition());
 				_ShockWave->SetLife(1);
 			}
+
 			if ((*iter2)->GetTimeCount() == 50)
 			{
-
 				_ShockWave->SetPosition((*iter2)->GetPosition());
 				_ShockWave->SetLife(1);
 			}
+			if (_pPlayer->GetActive())
+			{
+				if ((*iter)->Update() == 3 || (*iter)->Update() == 4)
+				{
+					Object* IObj = new Item;
+					IObj->SetLife(6);
+					IObj->Initialize();
+					IObj->SetPosition((*iter)->GetPosition());
+					IObj->SetSpeed(2.0f);
+					ItemList->push_back(IObj);
 
-			
-			
+					iResult = 1;
+				}
+			}
+
 			if ((*iter)->Update() == 3 || (*iter)->Update() == 4)
 			{
 				if (CollisionManager::EllipseCollision((*iter), _GrazeZone))
@@ -238,11 +285,6 @@ void Stage::Update()
 						(*iter)->SetLife(0);
 					}
 				}
-				
-				//if (CollisionManager::EllipseCollision(_ShockWave, (*iter)))
-				//{
-				//	iResult = 1;
-				//}
 			}
 			
 			if (CollisionManager::EllipseCollision((*iter), (*iter2)))
@@ -273,7 +315,7 @@ void Stage::Update()
 							++HitCount;
 							S += 10;
 							(*iter2)->SetPower(1);
-							if (HitCount == 5)
+							if (HitCount == 3)
 							{
 								EnemyHp--;
 								_EnemyHpBar->SetScale(_EnemyHpBar->GetScale().x - MinusHpBar, _EnemyHpBar->GetScale().y);
@@ -307,9 +349,6 @@ void Stage::Update()
 		Iiter != ItemList->end();)
 	{
 		int Re = (*Iiter)->Update();
-
-	
-
 		if (CollisionManager::EllipseCollision((*Iiter), _pPlayer))
 		{
 			switch ((*Iiter)->GetLife())
@@ -321,9 +360,10 @@ void Stage::Update()
 			case 1:
 				_pPlayer->SetItem(_pPlayer->GetItem() + 1);
 				S += (10 * (2 * (MaxHeight - _pPlayer->GetPosition().y)));
+				Re = 1;
 				break;
 			case 2:
-				_pPlayer->SetPower(_pPlayer->GetPower() + 10);
+				_pPlayer->SetPower(_pPlayer->GetPower() + 8);
 				S += 10;
 				break;
 			case 3:
@@ -338,6 +378,9 @@ void Stage::Update()
 			case 5:
 				++playerLife;
 				break;
+			case 6:
+				S += 100;
+				break;
 			default:
 				break;
 			}
@@ -346,11 +389,10 @@ void Stage::Update()
 		if (Re == 1)
 		{
 			Iiter = ItemList->erase(Iiter);
-			break;
+			//break;
 		}
 		else
 			++Iiter;
-		
 	}
 
 	

@@ -1,4 +1,6 @@
 #include "Item.h"
+#include "ObjectManager.h"
+#include "Player.h"
 
 void Item::Initialize()
 {
@@ -34,7 +36,7 @@ void Item::Initialize()
 		Frame = 3;
 		strKey = "Item2";
 		break;
-	case6:
+	case 6:
 		TransInfo.Scale = Vector3(10, 10);
 		Frame = 0;
 		strKey = "BulletSItem";
@@ -43,7 +45,7 @@ void Item::Initialize()
 		break;
 	}
 	
-
+	_pPlayer = ObjectManager::GetInstance()->GetPlayer();
 	Time = GetTickCount64();
 	TransInfo.Direction = Vector3(0.0f, -1.0f);
 }
@@ -57,14 +59,37 @@ int Item::Update()
 		)
 		return 1;
 
-	//TransInfo.Position.x += TransInfo.Direction.x * Speed;
-	TransInfo.Position.y += TransInfo.Direction.y * Speed;
-	if (Time + 100 < GetTickCount64())
+	
+	if (Life != 6)
 	{
-		if (Speed > -2.0f)
-			Speed -= 0.5f;
-		
-		Time = GetTickCount64();
+		if (Time + 100 < GetTickCount64())
+		{
+			if (Speed > -2.0f)
+				Speed -= 0.5f;
+			Time = GetTickCount64();
+
+		}
+		TransInfo.Position.y += TransInfo.Direction.y * Speed;
+	}
+	else
+	{
+		if (Speed > -1.0f)
+		{
+			if (Time + 100 < GetTickCount64())
+			{
+				Speed -= 0.5f;
+				Time = GetTickCount64();
+			}
+			TransInfo.Position.y += TransInfo.Direction.y * Speed;
+
+		}
+		else
+		{
+			TransInfo.Direction.x = (TransInfo.Position.x - _pPlayer->GetPosition().x) / 10;
+			TransInfo.Direction.y = (TransInfo.Position.y - _pPlayer->GetPosition().y) / 10;
+			TransInfo.Position.x += TransInfo.Direction.x * Speed;
+			TransInfo.Position.y += TransInfo.Direction.y * Speed;
+		}
 	}
     return 0;
 }

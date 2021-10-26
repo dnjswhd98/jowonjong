@@ -5,11 +5,15 @@ class Player : public Object
 {
 private:
 	bool Slow;
+	bool Fire;
+	bool bBomb;
 	float Speed;
 	float SlowSpeed;
 	int Frame;
+	int BFrame;
 	ULONGLONG Time;
 	ULONGLONG FTime;
+	ULONGLONG BTime;
 
 	vector<Object*>* BulletList;
 public:

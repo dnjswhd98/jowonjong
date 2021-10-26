@@ -19,8 +19,10 @@ void Logo::Initialize()
 
 	ImageList["MarisaBullet"] = (new Bitmap)->LoadBmp(L"../Resource/MBullet.bmp");
 	ImageList["MarisaLazer"] = (new Bitmap)->LoadBmp(L"../Resource/Lazer.bmp");
+	ImageList["MarisaMissile"] = (new Bitmap)->LoadBmp(L"../Resource/Mmissile.bmp");
 	ImageList["EnemyBullet"] = (new Bitmap)->LoadBmp(L"../Resource/EnemyBullet.bmp");
 	ImageList["EnemyBullet2"] = (new Bitmap)->LoadBmp(L"../Resource/EnemyBullet2.bmp");
+	ImageList["SubBomb"] = (new Bitmap)->LoadBmp(L"../Resource/SubBomb.bmp");
 
 	ImageList["Enemy"] = (new Bitmap)->LoadBmp(L"../Resource/stg2boss.bmp");
 
@@ -37,6 +39,7 @@ void Logo::Initialize()
 	ImageList["LifeBome"] = (new Bitmap)->LoadBmp(L"../Resource/star1.bmp");
 	ImageList["Item1"] = (new Bitmap)->LoadBmp(L"../Resource/Item1.bmp");
 	ImageList["Item2"] = (new Bitmap)->LoadBmp(L"../Resource/Item2.bmp");
+	ImageList["BulletSItem"] = (new Bitmap)->LoadBmp(L"../Resource/BulletScoreI.bmp");
 	ImageList["ItemNum"] = (new Bitmap)->LoadBmp(L"../Resource/Score.bmp");
 	ImageList["ShockWave"] = (new Bitmap)->LoadBmp(L"../Resource/deadEF.bmp");
 

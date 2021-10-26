@@ -7,6 +7,7 @@ private:
 	int Frame;
 
 	ULONGLONG Time;
+	Object* _pPlayer;
 public:
 	virtual void Initialize()override;
 	virtual int Update()override;

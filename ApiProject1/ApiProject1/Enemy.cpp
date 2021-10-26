@@ -89,8 +89,8 @@ int Enemy::Update()
 					Speed -= 0.15f;
 					for (int i = 0; i < 25; ++i)
 					{
-						float cx = sinf(((14.4 * i) * PI / 180));
-						float cy = cosf(((14.4 * i) * PI / 180));
+						float cx = sinf((14.4 * i) * PI / 180);
+						float cy = cosf((14.4 * i) * PI / 180);
 						if (Count < 2)
 						{
 							FrameX = 8;
@@ -229,10 +229,14 @@ int Enemy::Update()
 							else
 								direc.y = -2.0 + rand() % 5;
 						}
-						Speed = 1.0f;
+						Speed = 0.8f;
 					}
 					else if (Count >= 35 && Count < 43)
 					{
+						if (Speed > 0.2f)
+							Speed /= 1.5f;
+						else
+							Speed = 0;
 						for (int i = 1; i < 8; ++i)
 						{
 							float cx = sinf(((-55 + (15 * i)) * PI / 180));
@@ -257,6 +261,11 @@ int Enemy::Update()
 		}
 		else if(Power == 1)
 		{
+			if (Bomb >= 0)
+			{
+				--Bomb;
+				Count = 0;
+			}
 			if (FTime + 500 < GetTickCount64())
 			{
 				Vector3 BulletPos;

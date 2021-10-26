@@ -2,7 +2,17 @@
 #include "Object.h"
 class CollisionManager
 {
+private:
+	static CollisionManager* Instance;
 public:
+	static CollisionManager* GetInstance()
+	{
+		if (Instance == nullptr)
+			Instance = new CollisionManager;
+
+		return Instance;
+	}
+
 	static bool EllipseCollision(Object* _Temp, Object* _Dest)
 	{
 		float Sum = (_Temp->GetScale().x / 2) + (_Dest->GetScale().x / 2);

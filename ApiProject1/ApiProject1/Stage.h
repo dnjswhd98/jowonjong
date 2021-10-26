@@ -25,13 +25,14 @@ private:
 	Object* _PowerN;
 	Object* _ScoreIN;
 	Object* _GrazeN;
+	Object* _BossLife;
 	Object* _GrazeZone;
 	Object* _ShockWave;
 
 	vector<Object*>* BulletList;
 	vector<Object*>* EnemyList;
 	vector<Object*>* ItemList;
-	vector<Object*>* TileList;
+	//vector<Object*>* TileList;
 	map<string, Bitmap*> ImageList;
 public:
 	virtual void Initialize()override;

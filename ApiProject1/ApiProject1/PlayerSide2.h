@@ -10,6 +10,7 @@ private:
 	float minusX;
 	float minusY;
 	ULONGLONG time;
+	ULONGLONG Ftime;
 
 	vector<Object*>* BulletList;
 
