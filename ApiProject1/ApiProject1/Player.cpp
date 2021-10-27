@@ -17,6 +17,7 @@ void Player::Initialize()
 	Slow = false;
 	bBomb = false;
 	Active = false;
+	Dead = false;
 	Speed = 3.0f;
 	SlowSpeed = 2.0f;
 	Frame = 0;
@@ -25,7 +26,7 @@ void Player::Initialize()
 	strKey = "Marisa";
 	Life = 2;
 	Bomb = 3;
-	Power = 128;
+	Power = 127;
 	Item = 0;
 	Graze = 0;
 
@@ -155,6 +156,28 @@ int Player::Update()
 	if (Power > 128)
 		Power = 128;
 
+	if (Dead)
+	{
+		if (TransInfo.Scale.x <= 1)
+		{
+			TransInfo.Position = Vector3(WindowsWidth / 3, (WindowsHeight / 2) + 150);
+			TransInfo.Scale.x = 0;
+			Dead = false;
+		}
+		else
+		{
+			--TransInfo.Scale.x;
+			++TransInfo.Scale.y;
+		}
+	}
+	else
+	{
+		if (TransInfo.Scale.x != 29)
+			++TransInfo.Scale.x;
+		if (TransInfo.Scale.y != 44)
+			--TransInfo.Scale.y;
+	}
+	
 
 	return 0;
 }
@@ -170,7 +193,7 @@ void Player::Render(HDC _hdc)
 		int(TransInfo.Scale.x * Frame),
 		int(TransInfo.Scale.y * 0),
 		int(TransInfo.Scale.x),
-		int(TransInfo.Scale.y),
+		int(44),
 		RGB(255, 0, 255));
 }
 

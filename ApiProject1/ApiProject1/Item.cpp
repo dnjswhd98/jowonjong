@@ -66,9 +66,11 @@ int Item::Update()
 		{
 			if (Speed > -2.0f)
 				Speed -= 0.5f;
+			
 			Time = GetTickCount64();
 
 		}
+		
 		TransInfo.Position.y += TransInfo.Direction.y * Speed;
 	}
 	else

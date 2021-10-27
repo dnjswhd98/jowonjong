@@ -11,6 +11,7 @@ private:
 	int playerLife;
 	int HitCount;
 	int Tcount;
+	int PhCount;
 	float MaxHpBar;
 	float count;
 	ULONGLONG _BTime;
@@ -28,6 +29,7 @@ private:
 	Object* _BossLife;
 	Object* _GrazeZone;
 	Object* _ShockWave;
+	Object* PCore;
 
 	vector<Object*>* BulletList;
 	vector<Object*>* EnemyList;

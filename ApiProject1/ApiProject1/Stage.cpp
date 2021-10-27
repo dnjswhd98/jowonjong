@@ -17,6 +17,7 @@
 #include "ItemNum.h"
 #include "GrazeZone.h"
 #include "ShockWave.h"
+#include "PlayerCore.h"
 
 void Stage::Initialize()
 {
@@ -24,6 +25,8 @@ void Stage::Initialize()
 	_StageBack->Initialize();
 	_StageFront = new StageFront;
 	_StageFront->Initialize();
+	PCore = new PlayerCore;
+	PCore->Initialize();
 	_pPSide[0] = new PlayerSide;
 	_pPSide[0]->Initialize();
 	_pPSide[1] = new PlayerSide2;
@@ -65,11 +68,12 @@ void Stage::Initialize()
 	
 	
 
-	EnemyHp = 1000;
+	EnemyHp = 10;
 	EnemyHpMax = EnemyHp;
 	MaxHpBar = _EnemyHpBar->GetScale().x;
 	HitCount = 0;
 	Tcount = 0;
+	PhCount = 0;
 
 	S = 0;
 	playerLife = 3;
@@ -88,6 +92,7 @@ void Stage::Update()
 	_pPlayer->Update();
 	_pPSide[0]->Update();
 	_pPSide[1]->Update();
+	PCore->Update();
 	_PlayerBome->Update();
 	_PowerN->Update();
 	_PowerN->SetPower(_pPlayer->GetPower());
@@ -139,7 +144,25 @@ void Stage::Update()
 		//	++Titer;
 		//	//break;
 		//}
-
+		if (CollisionManager::EllipseCollision(PCore, (*iter)))
+		{
+			
+			if (_BTime + 500 < GetTickCount64())
+			{
+				++PhCount;
+				_BTime = GetTickCount64();
+			}
+			if (iResult == 3 || iResult == 4)
+			{
+				_pPlayer->SetLife(_pPlayer->GetLife() - 1);
+				_pPlayer->SetDead(true);
+				_pPlayer->SetPower(_pPlayer->GetPower() - 16);
+				_ShockWave->SetPower(0);
+				_ShockWave->SetPosition(_pPlayer->GetPosition());
+			}
+			
+		}
+		
 		if (iResult == 4)
 		{
 			(*iter)->SetSpeed((*iter)->GetSpeed() - 0.5f);
@@ -150,8 +173,39 @@ void Stage::Update()
 		{
 			if ((*iter2)->GetPower() == 1 && (*iter2)->GetLife() == 2)
 			{
+				
 				if (_ShockWave->GetPower() == 1)
 				{
+					if (_pPlayer->GetPower() < 128)
+					{
+						for (int i = 0; i < 8; ++i)
+						{
+							Object* pObj = new Item;
+							pObj->SetLife(rand() % 2);
+							pObj->SetPosition((*iter2)->GetPosition().x + (-100 + rand() % 200), (*iter2)->GetPosition().y + (-100 + rand() % 200));
+							pObj->SetSpeed(1.0f);
+							pObj->Initialize();
+							ItemList->push_back(pObj);
+						}
+						Object* BpObj = new Item;
+						BpObj->SetLife(2);
+						BpObj->SetPosition((*iter2)->GetPosition().x + (-100 + rand() % 200), (*iter2)->GetPosition().y + (-100 + rand() % 200));
+						BpObj->SetSpeed(1.0f);
+						BpObj->Initialize();
+						ItemList->push_back(BpObj);
+					}
+					else
+					{
+						for (int i = 0; i < 9; ++i)
+						{
+							Object* pObj = new Item;
+							pObj->SetLife(1);
+							pObj->SetPosition((*iter2)->GetPosition().x + (-100 + rand() % 200), (*iter2)->GetPosition().y + (-100 + rand() % 200));
+							pObj->SetSpeed(1.0f);
+							pObj->Initialize();
+							ItemList->push_back(pObj);
+						}
+					}
 					(*iter2)->SetActive(true);
 					(*iter2)->SetBomb(100);
 					_ShockWave->SetPower(0);
@@ -186,6 +240,36 @@ void Stage::Update()
 			{
 				if (_ShockWave->GetBomb() == 1)
 				{
+					if (_pPlayer->GetPower() < 128)
+					{
+						for (int i = 0; i < 8; ++i)
+						{
+							Object* pObj = new Item;
+							pObj->SetLife(rand() % 2);
+							pObj->SetPosition((*iter2)->GetPosition().x + (-100 + rand() % 200), (*iter2)->GetPosition().y + (-100 + rand() % 200));
+							pObj->SetSpeed(1.0f);
+							pObj->Initialize();
+							ItemList->push_back(pObj);
+						}
+						Object* BpObj = new Item;
+						BpObj->SetLife(2);
+						BpObj->SetPosition((*iter2)->GetPosition().x + (-100 + rand() % 200), (*iter2)->GetPosition().y + (-100 + rand() % 200));
+						BpObj->SetSpeed(1.0f);
+						BpObj->Initialize();
+						ItemList->push_back(BpObj);
+					}
+					else
+					{
+						for (int i = 0; i < 9; ++i)
+						{
+							Object* pObj = new Item;
+							pObj->SetLife(1);
+							pObj->SetPosition((*iter2)->GetPosition().x + (-100 + rand() % 200), (*iter2)->GetPosition().y + (-100 + rand() % 200));
+							pObj->SetSpeed(1.0f);
+							pObj->Initialize();
+							ItemList->push_back(pObj);
+						}
+					}
 					_ShockWave->SetLife(1);
 					_ShockWave->SetPosition((*iter2)->GetPosition());
 					Tcount = 0;
@@ -219,6 +303,36 @@ void Stage::Update()
 			{
 				if (_ShockWave->GetItem() == 1)
 				{
+					if (_pPlayer->GetPower() < 128)
+					{
+						for (int i = 0; i < 8; ++i)
+						{
+							Object* pObj = new Item;
+							pObj->SetLife(rand() % 2);
+							pObj->SetPosition((*iter2)->GetPosition().x + (-100 + rand() % 200), (*iter2)->GetPosition().y + (-100 + rand() % 200));
+							pObj->SetSpeed(1.0f);
+							pObj->Initialize();
+							ItemList->push_back(pObj);
+						}
+						Object* BpObj = new Item;
+						BpObj->SetLife(2);
+						BpObj->SetPosition((*iter2)->GetPosition().x + (-100 + rand() % 200), (*iter2)->GetPosition().y + (-100 + rand() % 200));
+						BpObj->SetSpeed(1.0f);
+						BpObj->Initialize();
+						ItemList->push_back(BpObj);
+					}
+					else
+					{
+						for (int i = 0; i < 9; ++i)
+						{
+							Object* pObj = new Item;
+							pObj->SetLife(1);
+							pObj->SetPosition((*iter2)->GetPosition().x + (-100 + rand() % 200), (*iter2)->GetPosition().y + (-100 + rand() % 200));
+							pObj->SetSpeed(1.0f);
+							pObj->Initialize();
+							ItemList->push_back(pObj);
+						}
+					}
 					(*iter2)->SetActive(true);
 					_ShockWave->SetLife(1);
 					_ShockWave->SetPosition((*iter2)->GetPosition());
@@ -262,6 +376,9 @@ void Stage::Update()
 			}
 			if (_pPlayer->GetActive())
 			{
+				_ShockWave->SetPosition(_pPlayer->GetPosition());
+				_ShockWave->SetLife(1);
+
 				if ((*iter)->Update() == 3 || (*iter)->Update() == 4)
 				{
 					Object* IObj = new Item;
@@ -412,6 +529,7 @@ void Stage::Render(HDC _hdc)
 	
 	//_GrazeZone->Render(ImageList["Buffer"]->GetMemDC());
 	_pPlayer->Render(ImageList["Buffer"]->GetMemDC());
+	PCore->Render(ImageList["Buffer"]->GetMemDC());
 	_pPSide[0]->Render(ImageList["Buffer"]->GetMemDC());
 	_pPSide[1]->Render(ImageList["Buffer"]->GetMemDC());
 

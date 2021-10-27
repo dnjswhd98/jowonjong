@@ -11,6 +11,7 @@ protected:
 
 	string strKey;
 	bool Active;
+	bool Dead;
 	int Life;
 	int Power;
 	int Bomb;
@@ -61,6 +62,8 @@ public:
 	void SetGraze(int _graze) { Graze = _graze; }
 	float GetSpeed() { return Speed; }
 	void SetSpeed(float _speed) { Speed = _speed; }
+	bool GetDead() { return Dead; }
+	void SetDead(bool bdead) { Dead = bdead; }
 	int GetTimeCount() { return TCount; }
 	void SetTime(ULONGLONG _time) { ATime = _time; }
 

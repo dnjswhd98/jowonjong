@@ -3,6 +3,8 @@
 
 class PlayerCore : public Object
 {
+private:
+	Object* _pPlayer;
 public:
 	virtual void Initialize()override;
 	virtual int Update()override;
